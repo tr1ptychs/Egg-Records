@@ -11,8 +11,8 @@ primary_region = 'ord'
 [build]
 
 [[mounts]]
-  source = 'eggrecords_data'
-  destination = '/data/eggrecords_data'
+  source = 'data'
+  destination = '/data'
   auto_extend_size_threshold = 80
   auto_extend_size_increment = '1GB'
   auto_extend_size_limit = '10GB'
