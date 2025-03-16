@@ -23,7 +23,7 @@ auth.use(
     {
       clientID: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      callbackURL: "http://localhost:5173/auth/discord/callback",
+      callbackURL: "http://salmon-records.fly.dev/auth/discord/callback",
       scope: ['identify', 'email']
     },
     async ({ profile }) => {
