@@ -7,9 +7,23 @@ declare global {
   let __db: Database | undefined;
 }
 
+const DB_PATH = process.env.NODE_ENV === "production"
+  ? "/data/eggrecords_data/data.sqlite"
+  : "data.sqlite";
+
+// Ensure the directory exists in production
+if (process.env.NODE_ENV === "production") {
+  const dir = "/data/eggrecords_data";
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
+
 // This prevents database connection leaks in development
 if (process.env.NODE_ENV === "production") {
-  db = sqlite("data.sqlite");
+  db = sqlite(DB_PATH);
+  console.log(`Connected to database at ${DB_PATH}`);
+
 } else {
   if (!global.__db) {
     global.__db = sqlite("data.sqlite");

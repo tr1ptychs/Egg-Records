@@ -2,15 +2,17 @@
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
-
 app = 'salmon-records'
 primary_region = 'ord'
+
+[env]
+  NODE_ENV = "production"
 
 [build]
 
 [[mounts]]
-  source = 'data'
-  destination = '/data'
+  source = 'eggrecords_data'
+  destination = '/data/eggrecords_data'
   auto_extend_size_threshold = 80
   auto_extend_size_increment = '1GB'
   auto_extend_size_limit = '10GB'
