@@ -23,7 +23,7 @@ auth.use(
     {
       clientID: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      callbackURL: "https://salmon-records.fly.dev/auth/discord/callback",
+      callbackURL: "https://eggrecords.ink/auth/discord/callback",
       scope: ['identify', 'email']
     },
     async ({ profile }) => {
