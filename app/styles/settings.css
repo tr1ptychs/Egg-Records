@@ -1,0 +1,235 @@
+.settings-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.settings-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.settings-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.settings-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.settings-section {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+}
+
+.section-description {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Toggle switch */
+.toggle-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+.toggle-input {
+  margin-right: 0.75rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.toggle-text,
+.select-text {
+  font-weight: 500;
+  width: 25%;
+}
+
+.select-label {
+  display: flex;
+  align-items: center;
+}
+
+.select-input {
+  appearance: none;
+  margin-right: 0.5rem;
+  background: #f1f5f9;
+  border: 1px solid transparent;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #2d3748;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-input:hover {
+  background: #e2e8f0;
+}
+
+.select-input:focus {
+  outline: none;
+  border-color: #ff6b6b;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+}
+
+/* Buttons */
+.save-button {
+  background: #4facfe;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-button:hover {
+  background: #2991fa;
+  transform: translateY(-1px);
+}
+
+.save-button:disabled {
+  background: #a0c4e4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Danger zone */
+.danger-zone {
+  background: #fffafa;
+}
+
+.delete-button {
+  background: white;
+  color: #e53e3e;
+  border: 1px solid #e53e3e;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+  background: #fff5f5;
+  transform: translateY(-1px);
+}
+
+.delete-confirm {
+  background: #fff5f5;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.warning-text {
+  color: #e53e3e;
+  margin-bottom: 1.5rem;
+}
+
+.confirm-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cancel-button {
+  background: white;
+  color: #4b5563;
+  border: 1px solid #ddd;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-button:hover {
+  background: #f9fafb;
+}
+
+.confirm-delete-button {
+  background: #e53e3e;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confirm-delete-button:hover:not(:disabled) {
+  background: #c53030;
+  transform: translateY(-1px);
+}
+
+.confirm-delete-button:disabled {
+  background: #fab5b5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.success-message {
+  background: #c6f6d5;
+  color: #2f855a;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.error-message {
+  background: #fed7d7;
+  color: #c53030;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .settings-container {
+    margin: 1rem auto;
+  }
+
+  .settings-header,
+  .settings-section {
+    padding: 1.25rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+}

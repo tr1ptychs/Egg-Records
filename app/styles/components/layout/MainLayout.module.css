@@ -1,0 +1,29 @@
+.main {
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+.pageLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+
+.feed {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .main {
+    margin: 2rem auto;
+  }
+
+  .pageLayout {
+    grid-template-columns: 1fr 320px;
+  }
+}

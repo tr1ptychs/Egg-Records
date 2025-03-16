@@ -1,0 +1,142 @@
+.container {
+  padding: 0 1rem 1rem;
+  overflow-x: auto;
+}
+
+.header {
+  display: flex;
+  border-bottom: 2px solid #eee;
+  font-weight: 600;
+  color: #4b5563;
+  font-size: 0.9375rem;
+  width: 100%;
+  text-align: left;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cellMap {
+  flex: 3;
+  width: 20%;
+  min-width: 120px;
+}
+
+.cellScore {
+  flex: 0.5;
+  width: 5%;
+  min-width: 50px;
+  text-align: center;
+}
+
+.cellDate {
+  flex: 0.75;
+  width: 10%;
+  min-width: 75px;
+}
+
+.cellType {
+  flex: 0.75;
+  width: 2.5%;
+  min-width: 25px;
+  text-align: center;
+}
+
+.cellHazard {
+  flex: 0.75;
+  width: 7.5%;
+  min-width: 75px;
+  text-align: center;
+}
+
+.cellRank {
+  flex: 2.5;
+  width: 12%;
+  min-width: 100px;
+  text-align: left;
+}
+
+.cellNote {
+  flex: 3;
+  width: 25%;
+  min-width: 150px;
+  text-align: left;
+}
+
+.cellActions {
+  flex: 0.8;
+  width: 5%;
+  min-width: 80px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.headerCell {
+  padding: 1rem 0.75rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .header {
+    font-size: 0.85rem;
+  }
+
+  .cellHazard,
+  .headerCell.cellHazard {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .cellRank,
+  .headerCell.cellRank,
+  .cellNote,
+  .headerCell.cellNote {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    display: none;
+  }
+
+  .cellMap,
+  .cellScore,
+  .cellDate,
+  .cellType,
+  .cellActions {
+    width: 90%;
+  }
+
+  .cellScore,
+  .cellType {
+    text-align: left;
+  }
+
+  .cellMap {
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .cellActions {
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 0.75rem;
+  }
+
+  .cellActions:before {
+    content: none;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+}

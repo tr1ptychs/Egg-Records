@@ -1,0 +1,228 @@
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.secondary {
+  background: rgba(79, 172, 254, 0.1);
+  color: var(--accent);
+}
+
+.secondary:hover {
+  background: rgba(79, 172, 254, 0.2);
+  transform: translateY(-2px);
+}
+
+.danger {
+  background: white;
+  color: #e53e3e;
+  border: 1px solid #e53e3e;
+}
+
+.danger:hover {
+  background: #fff5f5;
+  transform: translateY(-1px);
+}
+
+.text {
+  background: transparent;
+  color: var(--text);
+  padding: 0.5rem;
+}
+
+.text:hover {
+  color: var(--primary);
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.discord {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #5865F2;
+  color: white;
+  padding: 0.875rem 1.75rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.discord:hover {
+  background: #4752c4;
+  transform: translateY(-2px);
+}
+
+.sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.md {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.edit-button,
+.delete-button,
+.save-button,
+.cancel-button,
+.confirm-delete-button,
+.cancel-delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-button {
+  background: #f1f5f9;
+  color: #3b82f6;
+}
+
+.edit-button:hover {
+  background: #e2e8f0;
+}
+
+.delete-button {
+  background: #f1f5f9;
+  color: #ef4444;
+}
+
+.delete-button:hover {
+  background: #fee2e2;
+}
+
+.save-button {
+  background: #22c55e;
+  color: white;
+}
+
+.save-button:hover:not(:disabled) {
+  background: #16a34a;
+}
+
+.save-button:disabled {
+  background: #a7f3cf;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background: #f1f5f9;
+  color: #4b5563;
+}
+
+.cancel-button:hover {
+  background: #e2e8f0;
+}
+
+.confirm-delete-button {
+  background: #ef4444;
+  color: white;
+}
+
+.confirm-delete-button:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.confirm-delete-button:disabled {
+  background: #fca5a5;
+  cursor: not-allowed;
+}
+
+.cancel-delete-button {
+  background: #f1f5f9;
+  color: #4b5563;
+}
+
+.cancel-delete-button:hover {
+  background: #e2e8f0;
+}
+
+.save-button-large,
+.cancel-button-large {
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-button-large {
+  background: #ff6b6b;
+  color: white;
+  flex: 1;
+}
+
+.save-button-large:hover:not(:disabled) {
+  background: #ff5252;
+  transform: translateY(-1px);
+}
+
+.save-button-large:disabled {
+  background: #fca5a5;
+  cursor: not-allowed;
+}
+
+.cancel-button-large {
+  background: white;
+  color: #4b5563;
+  border: 1px solid #e2e8f0;
+  flex: 1;
+}
+
+.cancel-button-large:hover {
+  background: #f9fafb;
+}
+
+.add-score-button {
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.add-score-button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}

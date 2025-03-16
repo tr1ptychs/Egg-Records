@@ -1,0 +1,121 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  min-height: 64px;
+  align-items: center;
+}
+
+.editingRow {
+  background-color: #f8fafc;
+  flex-wrap: wrap;
+}
+
+.cell {
+  padding: 1rem 0.75rem;
+  flex-shrink: 0;
+}
+
+.scoreValue {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.noNote {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.noteCell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actionsCell {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.editBtn {
+  background: #f1f5f9;
+  color: #3b82f6;
+}
+
+.editBtn:hover {
+  background: #e2e8f0;
+}
+
+.deleteBtn {
+  background: #f1f5f9;
+  color: #ef4444;
+}
+
+.deleteBtn:hover {
+  background: #fee2e2;
+}
+
+.confirmBtn {
+  background: #ef4444;
+  color: white;
+}
+
+.confirmBtn:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.confirmBtn:disabled {
+  background: #fca5a5;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  background: #f1f5f9;
+  color: #4b5563;
+}
+
+.cancelBtn:hover {
+  background: #e2e8f0;
+}
+
+@media (max-width: 640px) {
+  .item {
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+  }
+
+  .cell {
+    padding: 0.5rem;
+  }
+
+  .cell[data-label]:before {
+    content: attr(data-label) ": ";
+    font-weight: 600;
+    margin-right: 0.5rem;
+    color: #64748b;
+    min-width: 70px;
+  }
+
+}

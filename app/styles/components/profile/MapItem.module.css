@@ -1,0 +1,100 @@
+.item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  margin-right: 1rem;
+  object-fit: contain;
+}
+
+.details {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.scores {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scoreDisplay {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  background: white;
+  width: fit-content;
+}
+
+.scoreEmoji {
+  font-size: 0.9rem;
+}
+
+.scoreValue {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ff4f00;
+  font-variant-numeric: tabular-nums;
+}
+
+.badges {
+  background: white;
+  width: fit-content;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.badgeIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 570px) {
+  .item {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .scoreDisplay {
+    padding: 0.2rem 0.35rem;
+  }
+
+  .scoreValue {
+    font-size: 0.875rem;
+  }
+}

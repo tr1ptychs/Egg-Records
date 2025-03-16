@@ -1,0 +1,65 @@
+/* show more for sidebar card */
+.show-more-button {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-top: 0;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.show-more-button:hover {
+  color: var(--primary);
+}
+
+.stats-modal {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.0rem;
+  box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.15);
+  min-width: 200px;
+  z-index: 1;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-item-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.stat-item-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.modal-arrow {
+  position: relative;
+  bottom: 0px;
+  right: 19.0rem;
+  width: 16px;
+  height: 16px;
+  background: var(--card-bg);
+  transform: rotate(45deg);
+  box-shadow: 4px 4px 7px -3px rgb(0 0 0 / 0.15);
+}

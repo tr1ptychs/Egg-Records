@@ -1,0 +1,168 @@
+.card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.userLink {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  border-radius: 12px;
+  width: 72px;
+  height: 72px;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+
+.date {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  background: rgba(79, 172, 254, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100px;
+}
+
+.mapIcon {
+  height: 75px;
+  width: auto;
+  object-fit: contain;
+}
+
+.eggIcon {
+  min-height: 35px;
+  width: auto;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.statValue {
+  font-size: 2.75rem;
+  line-height: 1;
+  font-weight: 600;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapName,
+.nightIndicator {
+  font-size: 2.75rem;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.note {
+  margin: 0;
+  color: #64748b;
+  font-style: italic;
+}
+
+.showMoreButton {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-top: 0;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.showMoreButton:hover {
+  color: var(--primary);
+}
+
+.statsModal {
+  position: relative;
+  top: 0.5rem;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.0rem;
+  box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.15);
+  z-index: 50;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statItemLabel {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.statItemValue {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+}

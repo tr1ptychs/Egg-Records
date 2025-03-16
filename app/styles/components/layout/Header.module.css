@@ -1,0 +1,147 @@
+.header {
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.navExpanded {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.navExpandedHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 2.0rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navLink {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: var(--primary);
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.navAuth {
+  display: flex;
+  align-items: center;
+  gap: 1.0rem;
+  margin-left: auto;
+}
+
+.logoutButton {
+  background: #f1f5f9;
+  color: #64748b;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.logoutButton:hover {
+  background: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.hamburgerMenu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.hamburgerMenu span {
+  height: 2px;
+  width: 100%;
+  background-color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.hamburgerActive span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburgerActive span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerActive span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+  }
+
+  .hamburgerMenu {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .navLinks,
+  .navAuth {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .navAuth {
+    margin-left: 0;
+  }
+
+  .expandedNavLinks,
+  .expandedNavAuth {
+    display: flex;
+  }
+
+  .expandedNavNestedLinks {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+}
