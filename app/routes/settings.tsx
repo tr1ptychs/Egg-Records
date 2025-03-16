@@ -170,9 +170,9 @@ export default function Settings() {
                 defaultValue={achievements.bigRun}
                 required>
                 <option name= "no-display" value="no-display">Do not display</option>
-                <option value="normal">Normal (50%)</option>
-                <option value="silver">Silver (20%)</option>
-                <option value="gold">Gold (5%)</option>
+                <option value="normal">Normal</option>
+                <option value="silver">Silver</option>
+                <option value="gold">Gold</option>
               </select>
               <span className="select-text">Big Run</span>
               </label>
@@ -185,9 +185,9 @@ export default function Settings() {
                 defaultValue={achievements.eggstraWork}
                 required> 
                 <option value="no-display">Do not display</option>
-                <option value="bronze">Bronze (50%)</option>
-                <option value="silver">Silver (20%)</option>
-                <option value="gold">Gold (5%)</option>
+                <option value="bronze">Bronze</option>
+                <option value="silver">Silver</option>
+                <option value="gold">Gold</option>
               </select>
               <span className="select-text">Eggstra Work</span>
               </label>
