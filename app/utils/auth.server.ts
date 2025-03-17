@@ -17,13 +17,17 @@ const sessionStorage = createCookieSessionStorage({
 
 export const auth = new Authenticator(sessionStorage);
 
+const callbackURL = process.env.NODE_ENV === "production"
+  ? "https://eggrecords.ink/auth/discord/callback"
+  : "http://localhost:5173/auth/discord/callback";
+
 // Discord strategy
 auth.use(
   new DiscordStrategy(
     {
       clientID: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      callbackURL: "https://eggrecords.ink/auth/discord/callback",
+      callbackURL: callbackURL,
       scope: ['identify', 'email']
     },
     async ({ profile }) => {
