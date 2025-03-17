@@ -60,7 +60,9 @@ export function LoginSidebar() {
 export function RecentScoresSidebar({ recentScores }: ScoreList)  {
   return (
     <Card className={styles.recentScoresCard}>
-      <h2>Your Recent Scores</h2>
+      <Link to={"/my-scores"} className={styles.recentScoresHeader}>
+        <h2>Your Recent Scores</h2>
+      </Link>
       
       {recentScores.length > 0 ? (
         <div className={styles.recentScoresList}>
