@@ -24,10 +24,10 @@ const RANKS = [
   "Part-Timer"
 ];
 
-interface actionData {
+interface ActionData {
   success?: boolean;
-  message?: boolean;
-  action?: boolean;
+  message?: string;
+  action?: string;
   error?: boolean;
 }
 

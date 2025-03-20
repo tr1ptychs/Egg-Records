@@ -92,9 +92,9 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   if (action === "updateAchievements") {
-    const bigRun = form.get("bigRun");
-    const eggstraWork = form.get("eggstraWork");
-    const grizzBadge = form.get("grizzBadge");
+    const bigRun = form.get("bigRun") || "no-display";
+    const eggstraWork = form.get("eggstraWork") || "no-display";
+    const grizzBadge = form.get("grizzBadge") || "no-display";
 
     if (!bigRun|| !eggstraWork|| !grizzBadge) {
       return json({ error: "Missing required fields" }, { status: 400 });

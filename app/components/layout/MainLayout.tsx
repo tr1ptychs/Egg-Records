@@ -19,7 +19,12 @@ export function MainLayout({
         </div>
         
         {!hideSidebar && (
-          <Sidebar user={user} userStats={userStats} sidebarType={sidebarType} recentScores={recentScores}/>
+          <Sidebar 
+            user={user} 
+            userStats={userStats || null} 
+            sidebarType={sidebarType} 
+            recentScores={recentScores || { scores: [] }}
+          />
         )}
       </div>
     </main>

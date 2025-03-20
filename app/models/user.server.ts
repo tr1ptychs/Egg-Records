@@ -24,7 +24,7 @@ export async function getUserAchievements(userId: number) {
   `).get(userId);
 }
 
-export async function updateUserAchievements(userId: number, bigRun: text, eggstraWork: text, grizzBadge: text) {
+export async function updateUserAchievements(userId: number, bigRun: string, eggstraWork: string, grizzBadge: string) {
   return db.prepare(`
     UPDATE user_Achievements
     SET bigRun = ?

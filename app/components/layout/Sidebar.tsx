@@ -57,7 +57,7 @@ export function LoginSidebar() {
   );
 }
 
-export function RecentScoresSidebar({ recentScores }: ScoreList)  {
+export function RecentScoresSidebar({ recentScores }: { recentScores: Score[] })  {
   return (
     <Card className={styles.recentScoresCard}>
       <Link to={"/my-scores"} className={styles.recentScoresHeader}>

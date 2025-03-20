@@ -7,8 +7,6 @@ import { MainLayout } from "~/components/layout/MainLayout";
 import { ScoreForm } from "~/components/scores/ScoreForm";
 import { Card } from "~/components/ui/Card";
 
-import "~/styles/submit.css";
-
 export const meta = () => {
   return [{ title: "Submit New Score" }];
 };
@@ -24,7 +22,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export async function action({ request }: ActionFunctionArgs) {
   const user = await getUserAuth(request);
-  if (!user) return redirect("/login");
+  if (!user) return redirect("/");
 
   const form = await request.formData();
   const map = form.get("map") as string;
@@ -61,9 +59,9 @@ export default function AddScore() {
 
   return (
     <MainLayout user={user} sidebarType="recentScores" recentScores={recentScores}>
-          <h1 className="page-title">Add New Score</h1>
+      <h1 className="page-title">Add New Score</h1>
           
-          <ScoreForm />
+      <ScoreForm />
     </MainLayout>
   );
 }

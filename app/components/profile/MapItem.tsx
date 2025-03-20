@@ -17,7 +17,7 @@ export function ScoreDisplay({ score, nightless }: ScoreDisplayProps) {
     <div className={styles.scoreDisplay}>
       <span className={styles.scoreEmoji}>{nightless ? "☀️" : "🌙"}</span>
       <span className={styles.scoreValue}>
-        {score}
+        {typeof score === 'object' ? JSON.stringify(score) : score}
       </span>
     </div>
   );

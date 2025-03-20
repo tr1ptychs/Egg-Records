@@ -20,5 +20,5 @@ export interface SidebarProps {
   user: User;
   userStats: UserStats;
   sidebarType: sidebarType;
-  recentScores: scoreList;
+  recentScores: ScoreList;
 }

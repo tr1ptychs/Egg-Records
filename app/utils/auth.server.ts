@@ -3,7 +3,6 @@ import { Authenticator } from "remix-auth";
 import { DiscordStrategy } from "remix-auth-discord";
 import { db } from "./db.server";
 
-// Session handling
 const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "_session",
@@ -21,7 +20,6 @@ const callbackURL = process.env.NODE_ENV === "production"
   ? "https://eggrecords.ink/auth/discord/callback"
   : "http://localhost:5173/auth/discord/callback";
 
-// Discord strategy
 auth.use(
   new DiscordStrategy(
     {
@@ -32,7 +30,7 @@ auth.use(
     },
     async ({ profile }) => {
       try {
-        // First try to find the user
+        // try to find the user
         let user = db.prepare(`
           SELECT * FROM users WHERE discordId = ?
         `).get(profile.id);
@@ -67,7 +65,6 @@ auth.use(
   )
 );
 
-// Logout
 export async function logout(request: Request) {
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie")
@@ -80,7 +77,6 @@ export async function logout(request: Request) {
   });
 }
 
-// Helper to get the logged-in user
 export async function getUserAuth(request: Request) {
   const user = await auth.isAuthenticated(request);
   return user;
