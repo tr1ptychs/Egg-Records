@@ -4,3 +4,5 @@
 Sign up with Discord and start submitting your scores to track your highest!
 
 Keep in mind that the app is still in development, so please be patient with downtime, bugs, and other problems.
+
+# Happy fishing! 🎣
