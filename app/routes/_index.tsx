@@ -9,7 +9,13 @@ import { User } from "~/types/user";
 import "~/styles/home.css"
 
 export const meta = () => {
-  return [{ title: "Egg Records" }];
+  return [
+    { title: "Egg Records - Track Your Salmon Run High Scores" },
+    { 
+      name: "description",
+      content: "Track and share your Splatoon 3 Salmon Run: Next Wave scores on a per-map basis. Join with Discord to start tracking your scores today!"
+    }
+  ];
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {

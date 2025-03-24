@@ -19,9 +19,13 @@ const ALL_MAPS = [
 
 export const meta: MetaFunction<typeof loader> = (args) => {
   if (!args.data) return [];
-  return [{
-    title: args.data.profile.username,
-  }];
+  return [
+    { title: `${args.data.profile.username} - Egg Records` },
+    { 
+      name: "description",
+      content: `Check out ${profile.username}'s Salmon Run high scores on Egg Records` 
+    }
+  ];
 };
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
