@@ -23,7 +23,7 @@ export const meta: MetaFunction<typeof loader> = (args) => {
     { title: `${args.data.profile.username} - Egg Records` },
     { 
       name: "description",
-      content: `Check out ${profile.username}'s Salmon Run high scores on Egg Records` 
+      content: `Check out ${args.data.profile.username}'s Salmon Run high scores on Egg Records` 
     }
   ];
 };
