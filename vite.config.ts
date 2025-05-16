@@ -23,14 +23,13 @@ export default defineConfig({
   ],
   server: {
     port: 5173,
-    // This is the WebSocket port
     hmr: {
-      port: 5173
-    }
+      port: 5173,
+    },
   },
   css: {
     modules: {
-      localsConvention: 'camelCase'
-    }
-  }
+      localsConvention: "camelCase",
+    },
+  },
 });

@@ -10,7 +10,7 @@ module.exports = {
     v2_routeConvention: true,
   },
   // Asset configuration
-  assetsBuildDirectory: "public/build",
+  assetsBuildDirectory: "/build/client/assets",
   publicPath: "/build/",
   // Development server
   // Enable CSS handling
