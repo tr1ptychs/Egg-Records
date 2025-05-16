@@ -10,9 +10,8 @@ import {
 import { json } from "@remix-run/node";
 import { getUserAuth } from "~/utils/auth.server";
 import { Header } from "~/components/layout/Header";
-
-import global from "~/styles/global.css";
 import { User } from "./types/user";
+import "~/styles/global.css";
 
 export const links: LinksFunction = () => [
   {
@@ -40,7 +39,6 @@ export const links: LinksFunction = () => [
     rel: "manifest",
     href: "/site.webmanifest",
   },
-  { rel: "stylesheet", href: global },
 ];
 
 export async function loader({ request }: LoaderFunctionArgs) {
