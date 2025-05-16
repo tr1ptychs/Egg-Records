@@ -20,7 +20,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   // Get all scores for the user
   const scores = await getScores(user.id);
 
-  return json({ user, scores });
+  return json({ scores });
 }
 
 export async function action({ request }: ActionFunctionArgs) {

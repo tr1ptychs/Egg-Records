@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useOutletContext } from "@remix-run/react";
 import { getUserAuth } from "~/utils/auth.server";
 import { createScore, getScores } from "~/models/score.server";
 import { MainLayout } from "~/components/layout/MainLayout";
@@ -16,9 +16,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const user = (await getUserAuth(request)) as User | null;
   if (!user) return redirect("/");
 
-  // Get just a few recent scores for the sidebar
+  // Get a few recent scores for the sidebar
   const recentScores = (await getScores(user.id)) as Score[];
-  return json({ user, recentScores: recentScores.slice(0, 5) });
+  return json({ recentScores: recentScores.slice(0, 5) });
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -55,7 +55,8 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function AddScore() {
-  const { user, recentScores } = useLoaderData<typeof loader>();
+  const { recentScores } = useLoaderData<typeof loader>();
+  const { user } = useOutletContext<{ user: User }>();
 
   return (
     <MainLayout

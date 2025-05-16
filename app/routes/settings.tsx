@@ -1,6 +1,10 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useLoaderData, useNavigation } from "@remix-run/react";
+import {
+  useLoaderData,
+  useNavigation,
+  useOutletContext,
+} from "@remix-run/react";
 import { useState } from "react";
 import { getUserAuth, logout } from "~/utils/auth.server";
 import { getUserAchievements } from "~/models/user.server";
@@ -14,7 +18,6 @@ export const meta = () => {
 };
 
 interface LoaderData {
-  user: User;
   isPrivate: boolean;
   achievements: UserAchievements;
 }
@@ -46,7 +49,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   }) as UserAchievements;
 
   return json<LoaderData>({
-    user,
     isPrivate: Boolean(userSettings.private),
     achievements,
   });
@@ -188,8 +190,9 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function Settings() {
-  const { user, isPrivate, achievements } = useLoaderData<typeof loader>();
+  const { isPrivate, achievements } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
+  const { user } = useOutletContext<{ user: User }>();
   const isSubmitting = navigation.state === "submitting";
   const [confirmation, setConfirmation] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);

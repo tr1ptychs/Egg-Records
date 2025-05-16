@@ -1,7 +1,5 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useOutletContext } from "@remix-run/react";
 import { json } from "@remix-run/node";
-import { getUserAuth } from "~/utils/auth.server";
 import { db } from "~/utils/db.server";
 import { MainLayout } from "~/components/layout/MainLayout";
 import { ScoreCard } from "~/components/scores/ScoreCard";
@@ -21,14 +19,10 @@ export const meta = () => {
 };
 
 interface LoaderData {
-  user: User | null;
   recentScores: Score[];
 }
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const userAuth = await getUserAuth(request);
-  const user = userAuth ? (userAuth as User) : null;
-
+export async function loader() {
   // Get recent global scores with user info
   const recentScores =
     (db
@@ -50,11 +44,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
       )
       .all() as Score[]) || ([] as Score[]);
 
-  return json<LoaderData>({ user, recentScores });
+  return json<LoaderData>({ recentScores });
 }
 
 export default function Index() {
-  const { user, recentScores } = useLoaderData<typeof loader>();
+  const { recentScores } = useLoaderData<typeof loader>();
+  const { user } = useOutletContext<{ user: User | null }>();
 
   return (
     <div>

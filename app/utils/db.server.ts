@@ -9,7 +9,9 @@ declare global {
 }
 
 const DB_PATH =
-  process.env.NODE_ENV === "production" ? "/data/data.sqlite" : "data.sqlite";
+  process.env.NODE_ENV === "production"
+    ? "/data/data.sqlite"
+    : "./data/data.sqlite";
 
 // Ensure the directory exists in production
 if (process.env.NODE_ENV === "production") {
