@@ -11,20 +11,7 @@ export interface Score {
   note: string | null;
 
   // joined from users table
-  username?: string;
-  avatar?: string;
-  discordId?: string;
-}
-
-export interface ScoreCardProps {
-  score: Score;
-}
-
-export interface ScoreFormProps {
-  defaultValues?: Partial<Score>;
-  isEditing?: boolean;
-}
-
-export interface ScoreList {
-  scores: Score[];
+  username: string;
+  avatar: string;
+  discordId: string;
 }

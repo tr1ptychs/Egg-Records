@@ -5,7 +5,7 @@ import { User, UserAchievements, MapScore } from "~/types/user";
 import styles from "~/styles/components/profile/Profile.module.css";
 
 interface ProfilePageProps {
-  profile: User;
+  user: User;
   mapScores: Record<string, MapScore>;
   achievements: UserAchievements;
   isPrivate: boolean;
@@ -15,29 +15,29 @@ interface ProfilePageProps {
 }
 
 export function ProfilePage({
-  profile,
+  user,
   mapScores,
   achievements,
   isPrivate,
   isOwnProfile,
   canViewProfile,
-  maps
+  maps,
 }: ProfilePageProps) {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <ProfileHeader 
-          profile={profile} 
-          isPrivate={isPrivate} 
-          isOwnProfile={isOwnProfile} 
+        <ProfileHeader
+          profile={user}
+          isPrivate={isPrivate}
+          isOwnProfile={isOwnProfile}
         />
 
         {!canViewProfile ? (
           <PrivateProfile />
         ) : (
-          <MapGrid 
-            mapScores={mapScores} 
-            achievements={achievements} 
+          <MapGrid
+            mapScores={mapScores}
+            achievements={achievements}
             maps={maps}
           />
         )}

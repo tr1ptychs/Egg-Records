@@ -15,7 +15,7 @@
   align-items: center;
 }
 
-.navExpanded {
+.nav-expanded {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
@@ -23,7 +23,7 @@
   flex-direction: column;
 }
 
-.navExpandedHeader {
+.nav-expanded-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,12 +37,12 @@
   text-decoration: none;
 }
 
-.navLinks {
+.nav-links {
   display: flex;
   gap: 1.5rem;
 }
 
-.navLink {
+.nav-link {
   color: var(--text);
   text-decoration: none;
   font-weight: 500;
@@ -52,19 +52,19 @@
   white-space: nowrap;
 }
 
-.navLink:hover {
+.nav-link:hover {
   color: var(--primary);
   background: rgba(255, 107, 107, 0.1);
 }
 
-.navAuth {
+.nav-auth {
   display: flex;
   align-items: center;
   gap: 1.0rem;
   margin-left: auto;
 }
 
-.logoutButton {
+.logout-button {
   background: #f1f5f9;
   color: #64748b;
   padding: 0.5rem 1rem;
@@ -77,12 +77,12 @@
   white-space: nowrap;
 }
 
-.logoutButton:hover {
+.logout-button:hover {
   background: #e2e8f0;
   transform: translateY(-1px);
 }
 
-.hamburgerMenu {
+.hamburger-menu {
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -91,22 +91,22 @@
   cursor: pointer;
 }
 
-.hamburgerMenu span {
+.hamburger-menu span {
   height: 2px;
   width: 100%;
   background-color: var(--text);
   transition: all 0.3s ease;
 }
 
-.hamburgerActive span:nth-child(1) {
+.hamburger-active span:nth-child(1) {
   transform: translateY(9px) rotate(45deg);
 }
 
-.hamburgerActive span:nth-child(2) {
+.hamburger-active span:nth-child(2) {
   opacity: 0;
 }
 
-.hamburgerActive span:nth-child(3) {
+.hamburger-active span:nth-child(3) {
   transform: translateY(-9px) rotate(-45deg);
 }
 
@@ -116,13 +116,13 @@
     padding: 0.75rem 1rem;
   }
 
-  .hamburgerMenu {
+  .hamburger-menu {
     display: flex;
     margin-left: auto;
   }
 
-  .navLinks,
-  .navAuth {
+  .nav-links,
+  .nav-auth {
     display: none;
     width: 100%;
     flex-direction: column;
@@ -131,16 +131,16 @@
     margin-top: 1rem;
   }
 
-  .navAuth {
+  .nav-auth {
     margin-left: 0;
   }
 
-  .expandedNavLinks,
-  .expandedNavAuth {
+  .expanded-nav-links,
+  .expanded-nav-auth {
     display: flex;
   }
 
-  .expandedNavNestedLinks {
+  .expanded-nav-nested-links {
     flex-direction: column;
     margin-bottom: 1rem;
   }

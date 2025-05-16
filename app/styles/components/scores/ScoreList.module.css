@@ -19,54 +19,54 @@
   width: 100%;
 }
 
-.cellMap {
+.cell-map {
   flex: 3;
   width: 20%;
   min-width: 120px;
 }
 
-.cellScore {
+.cell-score {
   flex: 0.5;
   width: 5%;
   min-width: 50px;
   text-align: center;
 }
 
-.cellDate {
+.cell-date {
   flex: 0.75;
   width: 10%;
   min-width: 75px;
 }
 
-.cellType {
+.cell-type {
   flex: 0.75;
   width: 2.5%;
   min-width: 25px;
   text-align: center;
 }
 
-.cellHazard {
+.cell-hazard {
   flex: 0.75;
   width: 7.5%;
   min-width: 75px;
   text-align: center;
 }
 
-.cellRank {
+.cell-rank {
   flex: 2.5;
   width: 12%;
   min-width: 100px;
   text-align: left;
 }
 
-.cellNote {
+.cell-note {
   flex: 3;
   width: 25%;
   min-width: 150px;
   text-align: left;
 }
 
-.cellActions {
+.cell-actions {
   flex: 0.8;
   width: 5%;
   min-width: 80px;
@@ -74,7 +74,7 @@
   justify-content: space-evenly;
 }
 
-.headerCell {
+.header-cell {
   padding: 1rem 0.75rem;
   flex-shrink: 0;
 }
@@ -84,18 +84,18 @@
     font-size: 0.85rem;
   }
 
-  .cellHazard,
-  .headerCell.cellHazard {
+  .cell-hazard,
+  .header-cell.cell-hazard {
     display: none;
   }
 }
 
 @media (max-width: 768px) {
 
-  .cellRank,
-  .headerCell.cellRank,
-  .cellNote,
-  .headerCell.cellNote {
+  .cell-rank,
+  .header-cell.cell-rank,
+  .cell-note,
+  .header-cell.cell-note {
     display: none;
   }
 }
@@ -105,26 +105,26 @@
     display: none;
   }
 
-  .cellMap,
-  .cellScore,
-  .cellDate,
-  .cellType,
-  .cellActions {
+  .cell-map,
+  .cell-score,
+  .cell-date,
+  .cell-type,
+  .cell-actions {
     width: 90%;
   }
 
-  .cellScore,
-  .cellType {
+  .cell-score,
+  .cell-type {
     text-align: left;
   }
 
-  .cellMap {
+  .cell-map {
     font-weight: 600;
     font-size: 1.1rem;
     border-bottom: 1px solid #f1f5f9;
   }
 
-  .cellActions {
+  .cell-actions {
     justify-content: flex-end;
     gap: 0.5rem;
     margin-top: 0.5rem;
@@ -132,7 +132,7 @@
     padding-top: 0.75rem;
   }
 
-  .cellActions:before {
+  .cell-actions:before {
     content: none;
   }
 

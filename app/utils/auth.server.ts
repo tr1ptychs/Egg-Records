@@ -3,56 +3,81 @@ import { Authenticator } from "remix-auth";
 import { DiscordStrategy } from "remix-auth-discord";
 import { db } from "./db.server";
 
+function getEnvVar(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`${name} must be set in .env.`);
+  }
+  return value;
+}
+
 const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "_session",
     sameSite: "lax",
     path: "/",
     httpOnly: true,
-    secrets: process.env.NODE_ENV === "production" ? process.env.SESSION_SECRET : "dev-secret",
+    secrets: [
+      process.env.NODE_ENV === "production"
+        ? getEnvVar("SESSION_SECRET")
+        : "dev-secret",
+    ],
     secure: process.env.NODE_ENV === "production",
   },
 });
 
 export const auth = new Authenticator(sessionStorage);
 
-const callbackURL = process.env.NODE_ENV === "production"
-  ? "https://eggrecords.ink/auth/discord/callback"
-  : "http://localhost:5173/auth/discord/callback";
+const callbackURL =
+  process.env.NODE_ENV === "production"
+    ? "https://eggrecords.ink/auth/discord/callback"
+    : "http://localhost:5173/auth/discord/callback";
 
 auth.use(
   new DiscordStrategy(
     {
-      clientID: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      clientID: getEnvVar("DISCORD_CLIENT_ID"),
+      clientSecret: getEnvVar("DISCORD_CLIENT_SECRET"),
       callbackURL: callbackURL,
-      scope: ['identify', 'email']
+      scope: ["identify", "email"],
     },
     async ({ profile }) => {
       try {
         // try to find the user
-        let user = db.prepare(`
+        let user = db
+          .prepare(
+            `
           SELECT * FROM users WHERE discordId = ?
-        `).get(profile.id);
+        `
+          )
+          .get(profile.id);
 
         if (!user) {
           // If user doesn't exist, insert new user
-          const result = db.prepare(`
+          const result = db
+            .prepare(
+              `
             INSERT INTO users (discordId, username, avatar)
             VALUES (?, ?, ?);
-          `).run(profile.id, profile.__json.username, profile.__json.avatar);
+          `
+            )
+            .run(profile.id, profile.__json.username, profile.__json.avatar);
 
-          user = db.prepare('SELECT * FROM users WHERE id = ?')
+          user = db
+            .prepare("SELECT * FROM users WHERE id = ?")
             .get(result.lastInsertRowid);
         } else {
           // If user exists, update their info
-          db.prepare(`
-            UPDATE users 
+          db.prepare(
+            `
+            UPDATE users
             SET username = ?, avatar = ?
             WHERE discordId = ?
-          `).run(profile.__json.username, profile.__json.avatar, profile.id);
-          
-          user = db.prepare('SELECT * FROM users WHERE discordId = ?')
+          `
+          ).run(profile.__json.username, profile.__json.avatar, profile.id);
+
+          user = db
+            .prepare("SELECT * FROM users WHERE discordId = ?")
             .get(profile.id);
         }
 
@@ -72,8 +97,8 @@ export async function logout(request: Request) {
 
   return redirect("/", {
     headers: {
-      "Set-Cookie": await sessionStorage.destroySession(session)
-    }
+      "Set-Cookie": await sessionStorage.destroySession(session),
+    },
   });
 }
 

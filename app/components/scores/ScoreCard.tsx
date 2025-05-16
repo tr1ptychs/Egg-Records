@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link } from "@remix-run/react";
 import { ChevronUp, ChevronDown } from "lucide-react";
-import { ScoreCardProps } from "~/types/score.ts"
+import { Score } from "~/types/score";
 import styles from "~/styles/components/scores/ScoreCard.module.css";
 
-
-export function ScoreCard({ score }: ScoreCardProps ) {
+export function ScoreCard({ score }: { score: Score }) {
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -14,7 +13,7 @@ export function ScoreCard({ score }: ScoreCardProps ) {
         <Link to={`/u/${score.username}`} className={styles.userLink}>
           <div className={styles.userInfo}>
             {score.avatar ? (
-              <img 
+              <img
                 src={`https://cdn.discordapp.com/avatars/${score.discordId}/${score.avatar}.webp?size=240`}
                 alt={score.username}
                 className={styles.avatar}
@@ -36,7 +35,10 @@ export function ScoreCard({ score }: ScoreCardProps ) {
         <div className={styles.stat}>
           <div className={styles.statValue}>
             <img
-              src={`/map/${score.map.toLowerCase().replace(/[']/g, '').replace(/\s/g, '-')}.png`}
+              src={`/map/${score.map
+                .toLowerCase()
+                .replace(/[']/g, "")
+                .replace(/\s/g, "-")}.png`}
               alt={score.map}
               className={styles.mapIcon}
             />
@@ -50,30 +52,30 @@ export function ScoreCard({ score }: ScoreCardProps ) {
         </div>
         <div className={styles.stat}>
           <span className={`${styles.statValue} ${styles.nightIndicator}`}>
-            {score.nightless ? '☀️' : '🌙'}
+            {score.nightless ? "☀️" : "🌙"}
           </span>
         </div>
       </div>
-      
+
       <div className={styles.footer}>
-        {score.note ? (
-          <p className={styles.note}>{score.note}</p>
-        ) : (
-          <span />
-        )}
-        
-        <button 
+        {score.note ? <p className={styles.note}>{score.note}</p> : <span />}
+
+        <button
           className={styles.showMoreButton}
           onClick={() => setOpenModal(!openModal)}
         >
           {openModal ? (
-            <>Hide details <ChevronUp size={16} /></>
+            <>
+              Hide details <ChevronUp size={16} />
+            </>
           ) : (
-            <>Show details <ChevronDown size={16} /></>
+            <>
+              Show details <ChevronDown size={16} />
+            </>
           )}
         </button>
       </div>
-      
+
       {openModal && (
         <div className={styles.statsModal}>
           <div className={styles.statsGrid}>
@@ -88,12 +90,14 @@ export function ScoreCard({ score }: ScoreCardProps ) {
             <div className={styles.statItem}>
               <span className={styles.statItemLabel}>Waves</span>
               <span className={styles.statItemValue}>
-                {score.nightless ? 'Day Only' : 'Regular'}
+                {score.nightless ? "Day Only" : "Regular"}
               </span>
             </div>
             <div className={styles.statItem}>
               <span className={styles.statItemLabel}>Hazard Level</span>
-              <span className={styles.statItemValue}>{score.hazard ?? 'Unknown'}%</span>
+              <span className={styles.statItemValue}>
+                {score.hazard ?? "Unknown"}%
+              </span>
             </div>
             <div className={styles.statItem}>
               <span className={styles.statItemLabel}>Rank</span>

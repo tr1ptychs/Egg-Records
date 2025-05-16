@@ -1,6 +1,7 @@
 import { Form, useSubmit } from "@remix-run/react";
 import { Score } from "~/types/score";
 import styles from "~/styles/components/scores/ScoreForm.module.css";
+import { ActionData } from "~/types/hook";
 import { useEffect, useRef } from "react";
 
 const MAPS = [
@@ -10,7 +11,7 @@ const MAPS = [
   "Marooner's Bay",
   "Jammin' Salmon Junction",
   "Salmonid Smokeyard",
-  "Bonerattle Arena"
+  "Bonerattle Arena",
 ];
 
 const RANKS = [
@@ -21,15 +22,8 @@ const RANKS = [
   "Profressional",
   "Overachiever",
   "Go-Getter",
-  "Part-Timer"
+  "Part-Timer",
 ];
-
-interface ActionData {
-  success?: boolean;
-  message?: string;
-  action?: string;
-  error?: boolean;
-}
 
 interface ScoreFormProps {
   mode: "create" | "edit";
@@ -39,21 +33,21 @@ interface ScoreFormProps {
   actionData?: ActionData;
 }
 
-export function ScoreForm({ 
-  mode = "create", 
-  score = {}, 
-  isSubmitting = false, 
-  onCancel, 
-  actionData 
+export function ScoreForm({
+  mode = "create",
+  score = {},
+  isSubmitting = false,
+  onCancel,
+  actionData,
 }: ScoreFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const submit = useSubmit();
 
   // Helper to format date for the date input (YYYY-MM-DD)
   const formatDateForInput = (dateString?: string) => {
-    if (!dateString) return '';
+    if (!dateString) return "";
     const date = new Date(dateString);
-    return date.toISOString().split('T')[0];
+    return date.toISOString().split("T")[0];
   };
 
   // Close the form if action was successful and we're in edit mode
@@ -70,13 +64,13 @@ export function ScoreForm({
     }
   };
 
-  const idPrefix = mode === "edit" && score.id ? `${score.id}-` : '';
+  const idPrefix = mode === "edit" && score.id ? `${score.id}-` : "";
 
   return (
-    <Form 
-      method="post" 
-      className={styles.form} 
-      ref={formRef} 
+    <Form
+      method="post"
+      className={styles.form}
+      ref={formRef}
       onSubmit={mode === "edit" ? handleSubmit : undefined}
     >
       {mode === "edit" && (
@@ -85,67 +79,77 @@ export function ScoreForm({
           <input type="hidden" name="scoreId" value={score.id} />
         </>
       )}
-      
+
       <div className={styles.grid}>
         <div className={styles.field}>
-          <label htmlFor={`map-${idPrefix}`} className={styles.label}>Map</label>
-          <select 
-            id={`map-${idPrefix}`} 
-            name="map" 
-            defaultValue={score.map} 
+          <label htmlFor={`map-${idPrefix}`} className={styles.label}>
+            Map
+          </label>
+          <select
+            id={`map-${idPrefix}`}
+            name="map"
+            defaultValue={score.map}
             className={`${styles.input} ${styles.select}`}
             required
           >
-            {MAPS.map(map => (
-              <option key={map} value={map}>{map}</option>
+            {MAPS.map((map) => (
+              <option key={map} value={map}>
+                {map}
+              </option>
             ))}
           </select>
         </div>
-        
+
         <div className={styles.field}>
-          <label htmlFor={`score-${idPrefix}`} className={styles.label}>Egg Count</label>
-          <input 
+          <label htmlFor={`score-${idPrefix}`} className={styles.label}>
+            Egg Count
+          </label>
+          <input
             id={`score-${idPrefix}`}
-            type="number" 
-            name="score" 
-            defaultValue={score.score} 
+            type="number"
+            name="score"
+            defaultValue={score.score}
             className={styles.input}
             required
           />
         </div>
-        
+
         <div className={`${styles.field} ${styles.checkboxGroup}`}>
-          <input 
+          <input
             id={`nightless-${idPrefix}`}
-            type="checkbox" 
-            name="nightless" 
+            type="checkbox"
+            name="nightless"
             defaultChecked={Boolean(score.nightless)}
             className={styles.checkbox}
           />
-          <label htmlFor={`nightless-${idPrefix}`} className={styles.label}>Day only</label>
+          <label htmlFor={`nightless-${idPrefix}`} className={styles.label}>
+            Day only
+          </label>
         </div>
-        
+
         <div className={styles.field}>
-          <label htmlFor={`rank-title-${idPrefix}`} className={styles.label}>Rank</label>
+          <label htmlFor={`rank-title-${idPrefix}`} className={styles.label}>
+            Rank
+          </label>
           <div className={styles.rankInputs}>
-            <select 
-              id={`rank-title-${idPrefix}`} 
-              name="rankTitle" 
-              defaultValue={score.rankTitle} 
+            <select
+              id={`rank-title-${idPrefix}`}
+              name="rankTitle"
+              defaultValue={score.rankTitle}
               className={`${styles.input} ${styles.select}`}
               required
             >
-              {RANKS.map(rank => (
+              {RANKS.map((rank) => (
                 <option key={rank} value={rank}>
-                  {rank.replace('Profressional', 'Professional ')}
+                  {rank.replace("Profressional", "Professional ")}
                 </option>
               ))}
             </select>
-            <input 
+            <input
               id={`rank-num-${idPrefix}`}
-              type="number" 
-              name="rankNum" 
-              defaultValue={score.rankNum} 
+              type="number"
+              name="rankNum"
+              defaultValue={score.rankNum}
               className={styles.input}
               min="0"
               max="999"
@@ -154,14 +158,16 @@ export function ScoreForm({
             />
           </div>
         </div>
-        
+
         <div className={styles.field}>
-          <label htmlFor={`hazard-${idPrefix}`} className={styles.label}>Hazard Level %</label>
-          <input 
+          <label htmlFor={`hazard-${idPrefix}`} className={styles.label}>
+            Hazard Level %
+          </label>
+          <input
             id={`hazard-${idPrefix}`}
-            type="number" 
-            name="hazard" 
-            defaultValue={score.hazard} 
+            type="number"
+            name="hazard"
+            defaultValue={score.hazard}
             className={styles.input}
             min="0"
             max="333"
@@ -169,47 +175,54 @@ export function ScoreForm({
             required
           />
         </div>
-        
+
         <div className={styles.field}>
-          <label htmlFor={`date-${idPrefix}`} className={styles.label}>Date</label>
-          <input 
+          <label htmlFor={`date-${idPrefix}`} className={styles.label}>
+            Date
+          </label>
+          <input
             id={`date-${idPrefix}`}
-            type="date" 
-            name="date" 
-            defaultValue={formatDateForInput(score.date)} 
+            type="date"
+            name="date"
+            defaultValue={formatDateForInput(score.date)}
             className={styles.input}
             required
           />
         </div>
-        
+
         <div className={`${styles.field} ${styles.noteField}`}>
-          <label htmlFor={`note-${idPrefix}`} className={styles.label}>Extra Details</label>
-          <input 
+          <label htmlFor={`note-${idPrefix}`} className={styles.label}>
+            Extra Details
+          </label>
+          <input
             id={`note-${idPrefix}`}
-            type="text" 
-            name="note" 
-            maxLength="140"
-            defaultValue={score.note || ''} 
+            type="text"
+            name="note"
+            maxLength={140}
+            defaultValue={score.note || ""}
             className={styles.input}
             placeholder="Share details about the shift!"
           />
         </div>
-        
+
         <div className={styles.actions}>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className={`${styles.btn} ${styles.saveBtn}`}
             disabled={isSubmitting}
           >
-            {isSubmitting 
-              ? (mode === "edit" ? "Saving..." : "Submitting...") 
-              : (mode === "edit" ? "Save Changes" : "Submit Score")
-            }
+            {isSubmitting
+              ? mode === "edit"
+                ? "Saving..."
+                : "Submitting..."
+              : mode === "edit"
+              ? "Save Changes"
+              : "Submit Score"}
           </button>
-          
+
           {mode === "edit" && onCancel && (
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={onCancel}
               className={`${styles.btn} ${styles.cancelBtn}`}
             >

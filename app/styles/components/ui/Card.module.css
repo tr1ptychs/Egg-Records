@@ -5,7 +5,7 @@
   overflow: hidden;
 }
 
-.cardHeader {
+.card-header {
   padding: 1.5rem 2rem;
   border-bottom: 1px solid #eee;
   display: flex;
@@ -13,18 +13,18 @@
   align-items: center;
 }
 
-.cardTitle {
+.card-title {
   font-size: 1.5rem;
   font-weight: 600;
   color: #1a1a1a;
   margin: 0;
 }
 
-.cardBody {
+.card-body {
   padding: 1.5rem;
 }
 
-.cardFooter {
+.card-footer {
   padding: 1.5rem 2rem;
   border-top: 1px solid #eee;
   display: flex;
@@ -47,16 +47,16 @@
 
 @media (max-width: 640px) {
 
-  .cardHeader,
-  .cardFooter {
+  .card-header,
+  .card-footer {
     padding: 1.25rem;
   }
 
-  .cardBody {
+  .card-body {
     padding: 1rem;
   }
 
-  .cardTitle {
+  .card-title {
     font-size: 1.25rem;
   }
 }

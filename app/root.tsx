@@ -12,24 +12,25 @@ import { getUserAuth } from "~/utils/auth.server";
 import { Header } from "~/components/layout/Header";
 
 import "~/styles/global.css";
+import { User } from "./types/user";
 
 export const links: LinksFunction = () => [
-  { 
-    rel: "icon", 
-    type: "image/svg+xml", 
+  {
+    rel: "icon",
+    type: "image/svg+xml",
     href: "/favicon.svg",
-    sizes: "any"
+    sizes: "any",
   },
   {
     rel: "apple-touch-icon",
     href: "/apple-touch-icon.png",
-    sizes: "180x180"
+    sizes: "180x180",
   },
   {
     rel: "icon",
     type: "image/png",
     href: "/favicon-96x96.png",
-    sizes: "96x96"
+    sizes: "96x96",
   },
   {
     rel: "shortcut icon",
@@ -37,12 +38,12 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "manifest",
-    href: "/site.webmanifest"
-  }
+    href: "/site.webmanifest",
+  },
 ];
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const user = await getUserAuth(request).catch(() => null);
+  const user = (await getUserAuth(request)) as User;
   return json({ user });
 }
 

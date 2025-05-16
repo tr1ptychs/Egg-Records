@@ -4,6 +4,7 @@ import { Pencil, Trash2, X, Check } from "lucide-react";
 import { ScoreForm } from "./ScoreForm";
 import { Score } from "~/types/score";
 import styles from "~/styles/components/scores/ScoreItem.module.css";
+import { ActionData } from "~/types/hook";
 
 interface CellStyles {
   map: string;
@@ -25,7 +26,7 @@ interface ScoreItemProps {
 export function ScoreItem({ score, isSubmitting, cellStyles }: ScoreItemProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const actionData = useActionData();
+  const actionData = useActionData() as ActionData;
 
   if (isEditing) {
     return (
@@ -33,9 +34,9 @@ export function ScoreItem({ score, isSubmitting, cellStyles }: ScoreItemProps) {
         <div className={styles.container}>
           <ScoreForm
             mode="edit"
-            score={score} 
-            isSubmitting={isSubmitting} 
-            onCancel={() => setIsEditing(false)} 
+            score={score}
+            isSubmitting={isSubmitting}
+            onCancel={() => setIsEditing(false)}
             actionData={actionData}
           />
         </div>
@@ -45,33 +46,54 @@ export function ScoreItem({ score, isSubmitting, cellStyles }: ScoreItemProps) {
 
   return (
     <div className={styles.item}>
-      <div className={`${styles.cell} ${cellStyles.map}`} data-label="Map">{score.map}</div>
-      <div className={`${styles.cell} ${cellStyles.score} ${styles.scoreValue}`} data-label="Score">{score.score}</div>
-      <div className={`${styles.cell} ${cellStyles.date}`} data-label="Date">{new Date(score.date).toLocaleDateString()}</div>
-      <div className={`${styles.cell} ${cellStyles.type}`} data-label="Type">{score.nightless ? '☀️' : '🌙'}</div>
-      <div className={`${styles.cell} ${cellStyles.hazard}`} data-label="Hazard">{score.hazard}%</div>
-      <div className={`${styles.cell} ${cellStyles.rank}`} data-label="Rank">
-        {score.rankTitle.replace('Profressional', 'Prof')} {score.rankNum}
+      <div className={`${styles.cell} ${cellStyles.map}`} data-label="Map">
+        {score.map}
       </div>
-      <div className={`${styles.cell} ${cellStyles.note} ${styles.noteCell}`} data-label="Note">
+      <div
+        className={`${styles.cell} ${cellStyles.score} ${styles.scoreValue}`}
+        data-label="Score"
+      >
+        {score.score}
+      </div>
+      <div className={`${styles.cell} ${cellStyles.date}`} data-label="Date">
+        {new Date(score.date).toLocaleDateString()}
+      </div>
+      <div className={`${styles.cell} ${cellStyles.type}`} data-label="Type">
+        {score.nightless ? "☀️" : "🌙"}
+      </div>
+      <div
+        className={`${styles.cell} ${cellStyles.hazard}`}
+        data-label="Hazard"
+      >
+        {score.hazard}%
+      </div>
+      <div className={`${styles.cell} ${cellStyles.rank}`} data-label="Rank">
+        {score.rankTitle.replace("Profressional", "Prof")} {score.rankNum}
+      </div>
+      <div
+        className={`${styles.cell} ${cellStyles.note} ${styles.noteCell}`}
+        data-label="Note"
+      >
         {score.note || <span className={styles.noNote}>No notes</span>}
       </div>
-      <div className={`${styles.cell} ${cellStyles.actions} ${styles.actionsCell}`}>
+      <div
+        className={`${styles.cell} ${cellStyles.actions} ${styles.actionsCell}`}
+      >
         {showDeleteConfirm ? (
           <>
             <Form method="post" className="delete-form">
               <input type="hidden" name="action" value="deleteScore" />
               <input type="hidden" name="scoreId" value={score.id} />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className={`${styles.actionBtn} ${styles.confirmBtn}`}
                 disabled={isSubmitting}
               >
                 <Check size={16} />
               </button>
             </Form>
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={() => setShowDeleteConfirm(false)}
               className={`${styles.actionBtn} ${styles.cancelBtn}`}
             >
@@ -80,13 +102,13 @@ export function ScoreItem({ score, isSubmitting, cellStyles }: ScoreItemProps) {
           </>
         ) : (
           <>
-            <button 
+            <button
               onClick={() => setIsEditing(true)}
               className={`${styles.actionBtn} ${styles.editBtn}`}
             >
               <Pencil size={16} />
             </button>
-            <button 
+            <button
               onClick={() => setShowDeleteConfirm(true)}
               className={`${styles.actionBtn} ${styles.deleteBtn}`}
             >

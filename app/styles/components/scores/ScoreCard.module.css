@@ -18,12 +18,12 @@
   margin-bottom: 1rem;
 }
 
-.userLink {
+.user-link {
   text-decoration: none;
   color: var(--text);
 }
 
-.userInfo {
+.user-info {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -64,20 +64,20 @@
   height: 100px;
 }
 
-.mapIcon {
+.map-icon {
   height: 75px;
   width: auto;
   object-fit: contain;
 }
 
-.eggIcon {
+.egg-icon {
   min-height: 35px;
   width: auto;
   margin-right: 8px;
   vertical-align: middle;
 }
 
-.statValue {
+.stat-value {
   font-size: 2.75rem;
   line-height: 1;
   font-weight: 600;
@@ -87,13 +87,13 @@
   justify-content: center;
 }
 
-.mapName,
-.nightIndicator {
+.map-name,
+.night-indicator {
   font-size: 2.75rem;
   line-height: 1;
 }
 
-.statLabel {
+.stat-label {
   font-size: 0.75rem;
   color: #64748b;
   margin-bottom: 0.25rem;
@@ -113,7 +113,7 @@
   font-style: italic;
 }
 
-.showMoreButton {
+.show-more-button {
   background: transparent;
   border: none;
   color: var(--accent);
@@ -128,11 +128,11 @@
   gap: 0.25rem;
 }
 
-.showMoreButton:hover {
+.show-more-button:hover {
   color: var(--primary);
 }
 
-.statsModal {
+.stats-modal {
   position: relative;
   top: 0.5rem;
   background: var(--card-bg);
@@ -142,26 +142,26 @@
   z-index: 50;
 }
 
-.statsGrid {
+.stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
-.statItem {
+.stat-item {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.statItemLabel {
+.statnitem-label {
   font-size: 0.75rem;
   color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.025em;
 }
 
-.statItemValue {
+.stat-item-value {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--text);

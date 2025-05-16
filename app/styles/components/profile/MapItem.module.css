@@ -34,7 +34,7 @@
   gap: 0.5rem;
 }
 
-.scoreDisplay {
+.score-display {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -44,11 +44,11 @@
   width: fit-content;
 }
 
-.scoreEmoji {
+.score-emoji {
   font-size: 0.9rem;
 }
 
-.scoreValue {
+.score-value {
   font-size: 1rem;
   font-weight: 600;
   color: #ff4f00;
@@ -65,7 +65,7 @@
   align-items: center;
 }
 
-.badgeIcon {
+.badge-icon {
   width: 24px;
   height: 24px;
   object-fit: contain;
@@ -90,11 +90,11 @@
     height: 36px;
   }
 
-  .scoreDisplay {
+  .score-display {
     padding: 0.2rem 0.35rem;
   }
 
-  .scoreValue {
+  .score-value {
     font-size: 0.875rem;
   }
 }

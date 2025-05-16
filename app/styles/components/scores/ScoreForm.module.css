@@ -66,21 +66,21 @@
   accent-color: #ff6b6b;
 }
 
-.checkboxGroup {
+.checkbox-group {
   display: flex;
   flex-direction: row !important;
   align-items: center;
   gap: 0.75rem !important;
 }
 
-.rankInputs {
+.rank-inputs {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 0.75rem;
   align-items: start;
 }
 
-.noteField {
+.note-field {
   grid-column: 1 / -1;
 }
 
@@ -102,32 +102,32 @@
   flex: 1;
 }
 
-.saveBtn {
+.save-btn {
   background: #ff6b6b;
   color: white;
 }
 
-.saveBtn:hover:not(:disabled) {
+.save-btn:hover:not(:disabled) {
   background: #ff5252;
   transform: translateY(-1px);
 }
 
-.saveBtn:disabled {
+.save-btn:disabled {
   background: #fca5a5;
   cursor: not-allowed;
 }
 
-.cancelBtn {
+.cancel-btn {
   background: white;
   color: #4b5563;
   border: 1px solid #e2e8f0;
 }
 
-.cancelBtn:hover {
+.cancel-btn:hover {
   background: #f9fafb;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1030px) {
   .grid {
     grid-template-columns: 1fr 1fr;
   }

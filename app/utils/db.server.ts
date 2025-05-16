@@ -1,15 +1,15 @@
-import sqlite from 'better-sqlite3';
-import type { Database } from 'better-sqlite3';
+import sqlite from "better-sqlite3";
+import type { Database } from "better-sqlite3";
 
 let db: Database;
 
 declare global {
-  let __db: Database | undefined;
+  // eslint-disable-next-line no-var
+  var __db: Database | undefined;
 }
 
-const DB_PATH = process.env.NODE_ENV === "production"
-  ? "/data/data.sqlite"
-  : "data.sqlite";
+const DB_PATH =
+  process.env.NODE_ENV === "production" ? "/data/data.sqlite" : "data.sqlite";
 
 // Ensure the directory exists in production
 if (process.env.NODE_ENV === "production") {
@@ -20,7 +20,6 @@ if (process.env.NODE_ENV === "production") {
 if (process.env.NODE_ENV === "production") {
   db = sqlite(DB_PATH);
   console.log(`Connected to database at ${DB_PATH}`);
-
 } else {
   if (!global.__db) {
     global.__db = sqlite("data.sqlite");
@@ -43,7 +42,7 @@ db.exec(`
     private BOOLEAN NOT NULL DEFAULT 0,
     UNIQUE(userId)
   );
-  
+
   CREATE TABLE IF NOT EXISTS user_achievements (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     userId INTEGER NOT NULL REFERENCES users(id),

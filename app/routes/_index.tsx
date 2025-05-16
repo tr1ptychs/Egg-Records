@@ -1,29 +1,40 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/node";
-import { useLoaderData, useOutletContext } from "@remix-run/react";
 import { getUserAuth } from "~/utils/auth.server";
 import { db } from "~/utils/db.server";
-import { MainLayout } from "~/components/layout/MainLayout"
+import { MainLayout } from "~/components/layout/MainLayout";
 import { ScoreCard } from "~/components/scores/ScoreCard";
 import { User } from "~/types/user";
-import "~/styles/home.css"
+import "~/styles/home.css";
+import { Score } from "~/types/score";
 
 export const meta = () => {
   return [
     { title: "Egg Records - Track Your Salmon Run High Scores" },
-    { 
+    {
       name: "description",
-      content: "Track and share your Splatoon 3 Salmon Run: Next Wave scores on a per-map basis. Join with Discord to start tracking your scores today!"
-    }
+      content:
+        "Track and share your Splatoon 3 Salmon Run: Next Wave scores on a per-map basis. Join with Discord to start tracking your scores today!",
+    },
   ];
 };
 
+interface LoaderData {
+  user: User | null;
+  recentScores: Score[];
+}
+
 export async function loader({ request }: LoaderFunctionArgs) {
-  const user = await getUserAuth(request);
-  
+  const userAuth = await getUserAuth(request);
+  const user = userAuth ? (userAuth as User) : null;
+
   // Get recent global scores with user info
-  const recentScores = db.prepare(`
-    SELECT 
+  const recentScores =
+    (db
+      .prepare(
+        `
+    SELECT
       scores.*,
       users.username,
       users.avatar,
@@ -35,48 +46,30 @@ export async function loader({ request }: LoaderFunctionArgs) {
     )
     ORDER BY scores.date DESC
     LIMIT 20
-  `).all() || [];
+  `
+      )
+      .all() as Score[]) || ([] as Score[]);
 
-  // Get user stats if logged in
-  let userStats = null;
-  if (user) {
-    const stats = {
-      totalGames: db.prepare('SELECT COUNT(*) as count FROM scores WHERE userId = ?')
-        .get(user.id),
-      averageScore: db.prepare('SELECT AVG(score) as avg FROM scores WHERE userId = ?')
-        .get(user.id),
-      highestScore: db.prepare('SELECT MAX(score) as max FROM scores WHERE userId = ?')
-        .get(user.id)
-    };
-
-    userStats = {
-      totalGames: stats.totalGames?.count || 0,
-      averageScore: Math.round(stats.averageScore?.avg || 0),
-      highestScore: stats.highestScore?.max || 0
-    };
-  }
-
-  return json({ recentScores, userStats });
+  return json<LoaderData>({ user, recentScores });
 }
 
 export default function Index() {
-  const { recentScores, userStats } = useLoaderData<typeof loader>();
-  const { user } = useOutletContext<{ user: User }>();
+  const { user, recentScores } = useLoaderData<typeof loader>();
 
   return (
     <div>
-    <MainLayout user={user} userStats={userStats}>
-      <h1 className="page-title">Recent Scores</h1>
-      {recentScores.length > 0 ? (
-        recentScores.map((score) => (
-          <ScoreCard key={score.id} score={score} />
-        ))
-      ) : (
-        <div className="empty-state">
-          <p>No scores yet! Be the first to add one 🦈</p>
-        </div>
-      )}
-    </MainLayout>
+      <MainLayout user={user} recentScores={recentScores}>
+        <h1 className="page-title">Recent Scores</h1>
+        {recentScores.length > 0 ? (
+          recentScores.map((score: Score) => (
+            <ScoreCard key={score.id} score={score} />
+          ))
+        ) : (
+          <div className="empty-state">
+            <p>No scores yet! Be the first to add one 🦈</p>
+          </div>
+        )}
+      </MainLayout>
     </div>
   );
 }

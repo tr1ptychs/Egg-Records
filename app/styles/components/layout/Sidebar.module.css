@@ -2,7 +2,7 @@
   position: relative;
 }
 
-.profileCard {
+.profile-card {
   text-align: center;
   padding: 2rem;
   background: white;
@@ -11,7 +11,7 @@
   margin-bottom: 1.5rem;
 }
 
-.profileHeader {
+.profile-header {
   text-decoration: none;
   color: var(--text);
   display: flex;
@@ -20,7 +20,7 @@
   margin-bottom: 1rem;
 }
 
-.profileAvatar {
+.profile-avatar {
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -29,11 +29,11 @@
   transition: var(--transition);
 }
 
-.profileAvatar:hover {
+.profile-avatar:hover {
   transform: scale(1.05);
 }
 
-.profileAvatarPlaceholder {
+.profile-avatar-placeholder {
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -47,7 +47,7 @@
   color: #64748b;
 }
 
-.profileName {
+.profile-name {
   font-size: 1.125rem;
   margin: 0;
   font-weight: 600;
@@ -63,32 +63,32 @@
   border-radius: 12px;
 }
 
-.statCard {
+.stat-card {
   padding: 0.5rem;
   background: var(--bg);
   text-align: center;
 }
 
-.statValue {
+.stat-value {
   font-size: 1.25rem;
   font-weight: 600;
   color: #2d3748;
   margin-bottom: 0.25rem;
 }
 
-.statLabel {
+.stat-label {
   font-size: 0.75rem;
   color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.025em;
 }
 
-.profileActions {
+.profile-actions {
   display: grid;
   gap: 0.75rem;
 }
 
-.loginCard {
+.login-card {
   text-align: center;
   padding: 2rem;
   background: white;
@@ -96,34 +96,34 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.loginTitle {
+.login-title {
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
 }
 
-.loginDescription {
+.login-description {
   color: #64748b;
   margin-bottom: 1.5rem;
 }
 
 @media (min-width: 768px) {
 
-  .profileCard,
-  .loginCard {
+  .profile-card,
+  .login-card {
     position: sticky;
     top: 5rem;
   }
 }
 
 /* recent scores for submit page */
-.recentScoresCard {
+.recent-scores-card {
   background: white;
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.recentScoresHeader {
+.recent-scores-header {
   text-decoration: none;
   display: flex;
   flex-direction: column;
@@ -131,48 +131,48 @@
   margin-bottom: 1rem;
 }
 
-.recentScoresCard h2 {
+.recent-scores-card h2 {
   font-size: 1.25rem;
   font-weight: 600;
   text-align: center;
   color: #2d3748;
 }
 
-.recentScoresList {
+.recent-scores-list {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.miniScoreCard {
+.mini-score-card {
   background: #f8fafc;
   border-radius: 12px;
   padding: 1rem;
 }
 
-.miniScoreHeader {
+.mini-score-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
 }
 
-.mapName {
+.map-name {
   color: #60a5fa;
   font-weight: 500;
 }
 
-.scoreDate {
+.score-date {
   color: #64748b;
   font-size: 0.875rem;
 }
 
-.eggCount {
+.egg-count {
   color: #ff6b6b;
   font-weight: 600;
 }
 
-.miniScoreDetails {
+.mini-score-details {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

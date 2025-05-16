@@ -27,5 +27,10 @@ export default defineConfig({
     hmr: {
       port: 5173
     }
+  },
+  css: {
+    modules: {
+      localsConvention: 'camelCase'
+    }
   }
 });

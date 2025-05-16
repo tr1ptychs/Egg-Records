@@ -5,23 +5,24 @@ import { getUserAuth } from "~/utils/auth.server";
 import { createScore, getScores } from "~/models/score.server";
 import { MainLayout } from "~/components/layout/MainLayout";
 import { ScoreForm } from "~/components/scores/ScoreForm";
-import { Card } from "~/components/ui/Card";
+import { User } from "~/types/user";
+import { Score } from "~/types/score";
 
 export const meta = () => {
   return [{ title: "Submit New Score" }];
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const user = await getUserAuth(request);
+  const user = (await getUserAuth(request)) as User | null;
   if (!user) return redirect("/");
 
   // Get just a few recent scores for the sidebar
-  const recentScores = await getScores(user.id);
+  const recentScores = (await getScores(user.id)) as Score[];
   return json({ user, recentScores: recentScores.slice(0, 5) });
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const user = await getUserAuth(request);
+  const user = (await getUserAuth(request)) as User | null;
   if (!user) return redirect("/");
 
   const form = await request.formData();
@@ -38,30 +39,33 @@ export async function action({ request }: ActionFunctionArgs) {
     return json({ error: "Missing required fields" }, { status: 400 });
   }
 
-  await createScore({ 
-    userId: user.id, 
-    map, 
-    score, 
-    date, 
+  await createScore({
+    userId: user.id,
+    map,
+    score,
+    date,
     note,
     nightless,
     hazard,
     rankTitle,
-    rankNum
+    rankNum,
   });
-  
+
   return redirect("/my-scores");
 }
 
 export default function AddScore() {
   const { user, recentScores } = useLoaderData<typeof loader>();
 
-
   return (
-    <MainLayout user={user} sidebarType="recentScores" recentScores={recentScores}>
+    <MainLayout
+      user={user}
+      sidebarType="recentScores"
+      recentScores={recentScores}
+    >
       <h1 className="page-title">Add New Score</h1>
-          
-      <ScoreForm />
+
+      <ScoreForm mode="create" />
     </MainLayout>
   );
 }

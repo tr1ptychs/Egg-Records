@@ -1,14 +1,19 @@
 import { useEffect, useRef } from "react";
 import { X } from "lucide-react";
-import { ModalProps } from "~/types/ui";
 
-
-export function Modal({ 
-  isOpen, 
-  onClose, 
-  title, 
-  children, 
-  className = "" 
+export interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: string;
+  children: React.ReactNode;
+  className?: string;
+}
+export function Modal({
+  isOpen,
+  onClose,
+  title,
+  children,
+  className = "",
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
