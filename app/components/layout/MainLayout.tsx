@@ -28,7 +28,7 @@ export function MainLayout({
           <Sidebar
             user={user}
             sidebarType={sidebarType}
-            recentScores={recentScores || { scores: [] }}
+            recentScores={recentScores || []}
           />
         )}
       </div>

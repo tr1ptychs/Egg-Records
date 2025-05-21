@@ -4,7 +4,6 @@ import { db } from "~/utils/db.server";
 import { MainLayout } from "~/components/layout/MainLayout";
 import { ScoreCard } from "~/components/scores/ScoreCard";
 import { User } from "~/types/user";
-import "~/styles/home.css";
 import { Score } from "~/types/score";
 
 export const meta = () => {
@@ -42,7 +41,7 @@ export async function loader() {
     LIMIT 20
   `
       )
-      .all() as Score[]) || ([] as Score[]);
+      .all() as Score[]) || [];
 
   return json<LoaderData>({ recentScores });
 }

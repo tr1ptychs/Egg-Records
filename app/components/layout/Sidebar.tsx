@@ -1,10 +1,10 @@
 import { Link } from "@remix-run/react";
-import styles from "~/styles/components/layout/Sidebar.module.css";
 import { Button } from "~/components/ui/Button";
 import { Card } from "~/components/ui/Card";
 import { User } from "~/types/user";
 import { SidebarType } from "~/types/layout";
 import { Score } from "~/types/score";
+import styles from "~/styles/components/layout/Sidebar.module.css";
 
 export function UserSidebar({ user }: { user: User }) {
   return (
@@ -61,7 +61,7 @@ export function RecentScoresSidebar({
         <h2>Your Recent Scores</h2>
       </Link>
 
-      {recentScores.length > 0 ? (
+      {recentScores && recentScores.length > 0 ? (
         <div className={styles.recentScoresList}>
           {recentScores.map((score) => (
             <div key={score.id} className={styles.miniScoreCard}>
@@ -78,7 +78,7 @@ export function RecentScoresSidebar({
           ))}
         </div>
       ) : (
-        <p className="empty-state">No scores yet!</p>
+        <p className={styles.emptyState}>No scores yet!</p>
       )}
     </Card>
   );

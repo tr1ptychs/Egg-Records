@@ -15,5 +15,5 @@ module.exports = {
   // Development server
   // Enable CSS handling
   postcss: true,
-  tailwind: false 
+  tailwind: false,
 };

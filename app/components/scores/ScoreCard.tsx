@@ -7,6 +7,8 @@ import styles from "~/styles/components/scores/ScoreCard.module.css";
 export function ScoreCard({ score }: { score: Score }) {
   const [openModal, setOpenModal] = useState(false);
 
+  if (!score) return null;
+
   return (
     <article className={styles.card}>
       <div className={styles.header}>
@@ -19,8 +21,10 @@ export function ScoreCard({ score }: { score: Score }) {
                 className={styles.avatar}
               />
             ) : (
-              <div className="avatar-placeholder">
-                {score.username[0].toUpperCase()}
+              <div className={styles.avatarPlaceholder}>
+                {score.username && score.username.length > 0
+                  ? score.username[0].toUpperCase()
+                  : "?"}
               </div>
             )}
             <span className={styles.username}>{score.username}</span>

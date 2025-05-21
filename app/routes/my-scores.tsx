@@ -144,17 +144,14 @@ export default function MyScores() {
 
   // Show notification when action is completed
   useEffect(() => {
-    if (actionData?.success) {
-      setNotification({ type: "success", message: actionData.message });
-      // Hide notification after 3 seconds
-      const timer = setTimeout(() => setNotification(null), 3000);
-      return () => clearTimeout(timer);
-    } else if (actionData && !actionData.success) {
-      setNotification({ type: "error", message: actionData.message });
-      // Hide notification after 3 seconds
-      const timer = setTimeout(() => setNotification(null), 3000);
-      return () => clearTimeout(timer);
-    }
+    if (!actionData) return;
+
+    const type = actionData.success ? "success" : "error";
+    setNotification({ type: type, message: actionData.message });
+
+    // display for three seconds
+    const timer = setTimeout(() => setNotification(null), 3000);
+    return () => clearTimeout(timer);
   }, [actionData]);
 
   const isSubmitting = navigation.state === "submitting";

@@ -58,8 +58,8 @@ export function ScoreForm({
   }, [actionData, onCancel, mode]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (mode === "edit") {
-      event.preventDefault();
       submit(event.currentTarget);
     }
   };

@@ -3,8 +3,8 @@ import { Form, useActionData } from "@remix-run/react";
 import { Pencil, Trash2, X, Check } from "lucide-react";
 import { ScoreForm } from "./ScoreForm";
 import { Score } from "~/types/score";
-import styles from "~/styles/components/scores/ScoreItem.module.css";
 import { ActionData } from "~/types/hook";
+import styles from "~/styles/components/scores/ScoreItem.module.css";
 
 interface CellStyles {
   map: string;
@@ -81,7 +81,7 @@ export function ScoreItem({ score, isSubmitting, cellStyles }: ScoreItemProps) {
       >
         {showDeleteConfirm ? (
           <>
-            <Form method="post" className="delete-form">
+            <Form method="post" className={styles.deleteForm}>
               <input type="hidden" name="action" value="deleteScore" />
               <input type="hidden" name="scoreId" value={score.id} />
               <button
