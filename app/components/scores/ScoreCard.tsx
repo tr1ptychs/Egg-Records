@@ -112,7 +112,7 @@ export function ScoreCard({ score }: { score: Score }) {
             <div className={styles.statItem}>
               <span className={styles.statItemLabel}>Date</span>
               <span className={styles.statItemValue}>
-                {new Date(score.date).toLocaleDateString()}
+                {score.formattedDate}
               </span>
             </div>
           </div>

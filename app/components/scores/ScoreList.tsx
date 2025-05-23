@@ -11,7 +11,6 @@ interface ScoreListProps {
 export function ScoreList({ scores, isSubmitting }: ScoreListProps) {
   return (
     <div className={styles.container}>
-      {/* Header row for columns */}
       <div className={styles.header}>
         <div className={`${styles.headerCell} ${styles.cellMap}`}>Map</div>
         <div className={`${styles.headerCell} ${styles.cellScore}`}>Score</div>

@@ -23,10 +23,9 @@ interface LoaderData {
 
 export async function loader() {
   // Get recent global scores with user info
-  const recentScores =
-    (db
-      .prepare(
-        `
+  const recentScoresResults = db
+    .prepare(
+      `
     SELECT
       scores.*,
       users.username,
@@ -40,8 +39,13 @@ export async function loader() {
     ORDER BY scores.date DESC
     LIMIT 20
   `
-      )
-      .all() as Score[]) || [];
+    )
+    .all() as Score[];
+
+  const recentScores = recentScoresResults.map((score) => ({
+    ...score,
+    formattedDate: new Date(score.date).toLocaleString("en-US"),
+  }));
 
   return json<LoaderData>({ recentScores });
 }
