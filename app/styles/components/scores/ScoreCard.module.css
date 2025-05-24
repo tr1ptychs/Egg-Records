@@ -4,6 +4,7 @@
   padding: 1.5rem;
   box-shadow: var(--shadow);
   transition: var(--transition);
+  will-change: transform;
 }
 
 .card:hover {
@@ -137,7 +138,7 @@
   top: 0.5rem;
   background: var(--card-bg);
   border-radius: var(--border-radius);
-  padding: 1.0rem;
+  padding: 1rem;
   box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.15);
   z-index: 50;
 }
