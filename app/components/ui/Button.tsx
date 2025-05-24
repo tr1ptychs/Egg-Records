@@ -28,6 +28,14 @@ export function Button({
     .join(" ");
 
   if (href) {
+    if (href.startsWith("/auth/")) {
+      return (
+        <a href={href} className={classNames} {...props}>
+          {children}
+        </a>
+      );
+    }
+
     return (
       <Link to={href} className={classNames} {...props}>
         {children}
