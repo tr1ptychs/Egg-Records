@@ -30,9 +30,7 @@ export function ScoreCard({ score }: { score: Score }) {
             <span className={styles.username}>{score.username}</span>
           </div>
         </Link>
-        <time className={styles.date} dateTime={score.date}>
-          {new Date(score.date).toLocaleDateString()}
-        </time>
+        <div className={styles.date}>{score.formattedDate}</div>
       </div>
 
       <div className={styles.details}>

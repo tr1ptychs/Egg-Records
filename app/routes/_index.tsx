@@ -44,7 +44,7 @@ export async function loader() {
 
   const recentScores = recentScoresResults.map((score) => ({
     ...score,
-    formattedDate: new Date(score.date).toLocaleString("en-US"),
+    formattedDate: new Date(score.date).toLocaleDateString(),
   }));
 
   return json<LoaderData>({ recentScores });

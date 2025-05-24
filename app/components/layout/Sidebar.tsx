@@ -67,9 +67,7 @@ export function RecentScoresSidebar({
             <div key={score.id} className={styles.miniScoreCard}>
               <div className={styles.miniScoreHeader}>
                 <span className={styles.mapName}>{score.map}</span>
-                <time className={styles.scoreDate}>
-                  {new Date(score.date).toLocaleDateString()}
-                </time>
+                <time className={styles.scoreDate}>{score.formattedDate}</time>
               </div>
               <div className={styles.miniScoreDetails}>
                 <span className={styles.eggCount}>{score.score} eggs</span>

@@ -56,7 +56,7 @@ export function ScoreItem({ score, isSubmitting, cellStyles }: ScoreItemProps) {
         {score.score}
       </div>
       <div className={`${styles.cell} ${cellStyles.date}`} data-label="Date">
-        {new Date(score.date).toLocaleDateString()}
+        {score.formattedDate}
       </div>
       <div className={`${styles.cell} ${cellStyles.type}`} data-label="Type">
         {score.nightless ? "☀️" : "🌙"}
