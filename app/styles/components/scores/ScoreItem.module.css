@@ -58,6 +58,7 @@
 .edit-btn {
   background: #f1f5f9;
   color: #3b82f6;
+  will-change: background;
 }
 
 .edit-btn:hover {
@@ -67,6 +68,7 @@
 .delete-btn {
   background: #f1f5f9;
   color: #ef4444;
+  will-change: background;
 }
 
 .delete-btn:hover {
@@ -76,6 +78,7 @@
 .confirm-btn {
   background: #ef4444;
   color: white;
+  will-change: background;
 }
 
 .confirm-btn:hover:not(:disabled) {
@@ -90,6 +93,7 @@
 .cancel-btn {
   background: #f1f5f9;
   color: #4b5563;
+  will-change: background;
 }
 
 .cancel-btn:hover {
@@ -117,5 +121,4 @@
     color: #64748b;
     min-width: 70px;
   }
-
 }

@@ -56,6 +56,7 @@
   color: #2d3748;
   cursor: pointer;
   transition: all 0.2s ease;
+  will-change: background;
 }
 
 .select-input:hover {
@@ -69,7 +70,6 @@
   box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
 }
 
-/* Buttons */
 .save-button {
   background: #4facfe;
   color: white;
@@ -79,6 +79,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  will-change: transform, background;
 }
 
 .save-button:hover {
@@ -92,7 +93,6 @@
   transform: none;
 }
 
-/* Danger zone */
 .danger-zone {
   background: #fffafa;
 }
@@ -106,6 +106,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  will-change: background, transform;
 }
 
 .delete-button:hover {
@@ -148,6 +149,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  will-change: background;
 }
 
 .cancel-button:hover {
@@ -163,6 +165,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  will-change: background, transform;
 }
 
 .confirm-delete-button:hover:not(:disabled) {

@@ -48,6 +48,7 @@
   border: 1px solid transparent;
   color: #2d3748;
   cursor: pointer;
+  will-change: background;
 }
 
 .select:hover {
@@ -105,6 +106,7 @@
 .save-btn {
   background: #ff6b6b;
   color: white;
+  will-change: background;
 }
 
 .save-btn:hover:not(:disabled) {
@@ -121,6 +123,7 @@
   background: white;
   color: #4b5563;
   border: 1px solid #e2e8f0;
+  will-change: background;
 }
 
 .cancel-btn:hover {

@@ -34,6 +34,11 @@
   border-radius: 12px;
   width: 72px;
   height: 72px;
+  will-change: transform;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
 }
 
 .username {
@@ -127,6 +132,7 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  will-change: color;
 }
 
 .show-more-button:hover {

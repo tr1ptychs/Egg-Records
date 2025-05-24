@@ -32,7 +32,7 @@
 
 .logo {
   font-weight: 700;
-  font-size: 2.0rem;
+  font-size: 2rem;
   color: var(--primary);
   text-decoration: none;
 }
@@ -50,6 +50,7 @@
   padding: 0.5rem 0.75rem;
   border-radius: 9999px;
   white-space: nowrap;
+  will-change: color, background;
 }
 
 .nav-link:hover {
@@ -60,7 +61,7 @@
 .nav-auth {
   display: flex;
   align-items: center;
-  gap: 1.0rem;
+  gap: 1rem;
   margin-left: auto;
 }
 
@@ -75,6 +76,7 @@
   cursor: pointer;
   transition: var(--transition);
   white-space: nowrap;
+  will-change: transform, background;
 }
 
 .logout-button:hover {
