@@ -18,7 +18,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (!user) return redirect("/");
 
   // Get all scores for the user
-  const scores = await getScores(user.id);
+  const userScores = (await getScores(user.id)) as Score[];
+  // Format date for readability
+  const scores = userScores.map((score) => ({
+    ...score,
+    formattedDate: new Date(score.date).toLocaleDateString(),
+  }));
 
   return json({ scores });
 }

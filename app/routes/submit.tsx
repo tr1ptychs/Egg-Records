@@ -17,7 +17,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (!user) return redirect("/");
 
   // Get a few recent scores for the sidebar
-  const recentScores = (await getScores(user.id)) as Score[];
+  const scores = (await getScores(user.id)) as Score[];
+  const recentScores = scores.map((score) => ({
+    ...score,
+    formattedDate: new Date(score.date).toLocaleDateString(),
+  }));
   return json({ recentScores: recentScores.slice(0, 5) });
 }
 
