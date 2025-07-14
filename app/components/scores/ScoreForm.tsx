@@ -1,4 +1,4 @@
-import { Form, useSubmit } from "@remix-run/react";
+import { useSubmit, useFetcher } from "@remix-run/react";
 import { Score } from "~/types/score";
 import styles from "~/styles/components/scores/ScoreForm.module.css";
 import { ActionData } from "~/types/hook";
@@ -38,9 +38,9 @@ export function ScoreForm({
   score = {},
   isSubmitting = false,
   onCancel,
-  actionData,
 }: ScoreFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
+  const fetcher = useFetcher<ActionData>();
   const submit = useSubmit();
 
   // Helper to format date for the date input (YYYY-MM-DD)
@@ -52,10 +52,15 @@ export function ScoreForm({
 
   // Close the form if action was successful and we're in edit mode
   useEffect(() => {
-    if (mode === "edit" && actionData?.success && onCancel) {
+    if (
+      mode === "edit" &&
+      fetcher.state === "idle" &&
+      fetcher.data?.success &&
+      onCancel
+    ) {
       onCancel();
     }
-  }, [actionData, onCancel, mode]);
+  }, [fetcher.state, fetcher.data, mode, onCancel]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -67,7 +72,7 @@ export function ScoreForm({
   const idPrefix = mode === "edit" && score.id ? `${score.id}-` : "";
 
   return (
-    <Form
+    <fetcher.Form
       method="post"
       className={styles.form}
       ref={formRef}
@@ -231,6 +236,6 @@ export function ScoreForm({
           )}
         </div>
       </div>
-    </Form>
+    </fetcher.Form>
   );
 }
