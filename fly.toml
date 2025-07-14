@@ -10,6 +10,9 @@ primary_region = 'ord'
 
 [build]
 
+[deploy]
+  regions = ["ams"]
+
 [[mounts]]
   source = 'data'
   destination = '/data'
