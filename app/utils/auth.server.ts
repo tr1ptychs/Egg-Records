@@ -39,7 +39,7 @@ auth.use(
       clientID: getEnvVar("DISCORD_CLIENT_ID"),
       clientSecret: getEnvVar("DISCORD_CLIENT_SECRET"),
       callbackURL: callbackURL,
-      scope: ["identify", "email"],
+      scope: ["identify"],
     },
     async ({ profile }) => {
       try {
