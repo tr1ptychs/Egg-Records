@@ -1,6 +1,7 @@
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import { Authenticator } from "remix-auth";
 import { DiscordStrategy } from "remix-auth-discord";
+import type { User } from "~/types/user.ts";
 import { db } from "./db.server";
 
 function getEnvVar(name: string): string {
@@ -44,7 +45,7 @@ auth.use(
     async ({ profile }) => {
       try {
         // try to find the user
-        let user = db
+        const findUser = db
           .prepare(
             `
           SELECT * FROM users WHERE discordId = ?
@@ -52,8 +53,8 @@ auth.use(
           )
           .get(profile.id);
 
-        if (!user) {
-          // If user doesn't exist, insert new user
+        // If user doesn't exist, set up new user
+        if (!findUser) {
           const result = db
             .prepare(
               `
@@ -63,25 +64,33 @@ auth.use(
             )
             .run(profile.id, profile.__json.username, profile.__json.avatar);
 
-          user = db
+          const newUser = (await db
             .prepare("SELECT * FROM users WHERE id = ?")
-            .get(result.lastInsertRowid);
-        } else {
-          // If user exists, update their info
+            .get(result.lastInsertRowid)) as User;
+
           db.prepare(
-            `
+            "INSERT INTO user_settings (userId, private) VALUES (?, ?)"
+          ).run(newUser.id, false);
+
+          db.prepare(
+            "INSERT INTO user_achievements (userId, grizzBadge, bigRun, eggstraWork) VALUES (?, ?, ?, ?)"
+          ).run(newUser.id, "no-display", "no-display", "no-display");
+          return newUser;
+        }
+
+        // otherwise, update their info
+        db.prepare(
+          `
             UPDATE users
             SET username = ?, avatar = ?
             WHERE discordId = ?
           `
-          ).run(profile.__json.username, profile.__json.avatar, profile.id);
+        ).run(profile.__json.username, profile.__json.avatar, profile.id);
 
-          user = db
-            .prepare("SELECT * FROM users WHERE discordId = ?")
-            .get(profile.id);
-        }
-
-        return user;
+        const existingUser = db
+          .prepare("SELECT * FROM users WHERE discordId = ?")
+          .get(profile.id);
+        return existingUser;
       } catch (error) {
         console.error("Database error:", error);
         throw error;

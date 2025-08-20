@@ -9,7 +9,7 @@ import {
 import { getScores } from "~/models/score.server";
 import { getUserAuth } from "~/utils/auth.server";
 import { ProfilePage } from "~/components/profile/Profile";
-import { MapScore, User, UserAchievements, UserSettings } from "~/types/user";
+import { MapScore, User, UserAchievements } from "~/types/user";
 import { Score } from "~/types/score";
 
 const ALL_MAPS = [
@@ -45,13 +45,9 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     throw new Response("User not found", { status: 404 });
   }
 
-  // Get the current logged-in user
   const currentUser = (await getUserAuth(request)) as User | null;
 
-  // Check privacy settings
-  const userSettings = (await getUserPrivacy(user.id)) as UserSettings;
-
-  const isPrivate = userSettings && userSettings.private ? true : false;
+  const isPrivate = await getUserPrivacy(user.id);
 
   // Only allow viewing if profile is public OR it's the user's own profile
   const isOwnProfile = (currentUser && currentUser.id === user.id) as boolean;
@@ -62,36 +58,20 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
   const scores = (await getScores(user.id)) as Score[];
 
-  // Initialize maps with empty scores for both types
   mapScores = ALL_MAPS.reduce((acc, map) => {
     acc[map] = {
       regular: { score: null },
       nightless: { score: null },
-      bestOverall: {
-        score: null,
-        isNightless: false,
-      },
     };
     return acc;
   }, {} as Record<string, MapScore>);
 
   achievements = (await getUserAchievements(user.id)) as UserAchievements;
 
-  if (!achievements) {
-    achievements = {
-      id: 0,
-      userId: user.id,
-      bigRun: "no-display",
-      eggstraWork: "no-display",
-      grizzBadge: "no-display",
-    } as UserAchievements;
-  }
-
   // Find best scores for each category
   scores.forEach((score) => {
     const mapScore = mapScores[score.map];
 
-    // Update nightless or regular best
     if (score.nightless) {
       if (!mapScore.nightless.score || score.score > mapScore.nightless.score) {
         mapScore.nightless.score = score.score;
@@ -100,15 +80,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       if (!mapScore.regular.score || score.score > mapScore.regular.score) {
         mapScore.regular.score = score.score;
       }
-    }
-
-    // Update overall best if this is higher
-    if (
-      !mapScore.bestOverall.score ||
-      score.score > mapScore.bestOverall.score
-    ) {
-      mapScore.bestOverall.score = score.score;
-      mapScore.bestOverall.isNightless = score.nightless;
     }
   });
 
