@@ -29,11 +29,10 @@ beforeEach(() => {
 });
 
 describe("settings loader", () => {
-  it("redirects to root with 302 when user not logged in", async () => {
-    await expect(loader(mkArgs())).rejects.toMatchObject({
-      status: 302,
-      headers: new Headers({ Location: "/" }),
-    });
+  it("redirects with 302 when user not logged in", async () => {
+    const res = await loader(mkArgs());
+    expect(res.status).toBe(302);
+    expect(res.headers.get("location")).toBe("/");
   });
 
   it("returns privacy and achievements for authenticated user", async () => {
