@@ -62,25 +62,11 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     acc[map] = {
       regular: { score: null },
       nightless: { score: null },
-      bestOverall: {
-        score: null,
-        isNightless: false,
-      },
     };
     return acc;
   }, {} as Record<string, MapScore>);
 
   achievements = (await getUserAchievements(user.id)) as UserAchievements;
-
-  if (!achievements) {
-    achievements = {
-      id: 0,
-      userId: user.id,
-      bigRun: "no-display",
-      eggstraWork: "no-display",
-      grizzBadge: "no-display",
-    } as UserAchievements;
-  }
 
   // Find best scores for each category
   scores.forEach((score) => {
@@ -94,14 +80,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       if (!mapScore.regular.score || score.score > mapScore.regular.score) {
         mapScore.regular.score = score.score;
       }
-    }
-
-    if (
-      !mapScore.bestOverall.score ||
-      score.score > mapScore.bestOverall.score
-    ) {
-      mapScore.bestOverall.score = score.score;
-      mapScore.bestOverall.isNightless = score.nightless;
     }
   });
 

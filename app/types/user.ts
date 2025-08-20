@@ -31,7 +31,4 @@ export interface ScoreRecord {
 export interface MapScore {
   regular: ScoreRecord;
   nightless: ScoreRecord;
-  bestOverall: ScoreRecord & {
-    isNightless: boolean;
-  };
 }
