@@ -55,7 +55,6 @@ export async function action({ request }: ActionFunctionArgs) {
     const currentPrivate = await getUserPrivacy(user.id);
 
     if (isPrivate !== currentPrivate) {
-      console.log("setting privacy...");
       await setUserPrivacy(user.id, isPrivate);
     }
 
@@ -147,7 +146,6 @@ export default function Settings() {
   const [confirmation, setConfirmation] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  console.log(isPrivate);
   return (
     <SettingsPage
       user={user}

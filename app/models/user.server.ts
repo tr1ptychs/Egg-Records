@@ -32,7 +32,6 @@ export async function getUserPrivacy(userId: number): Promise<boolean> {
 
 export async function setUserPrivacy(userId: number, isPrivate: boolean) {
   const newPrivacy = isPrivate ? 1 : 0;
-  console.log(newPrivacy);
 
   console.log(
     db
