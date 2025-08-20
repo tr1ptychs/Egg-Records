@@ -1,5 +1,6 @@
 /.git
 /node_modules
+
 .dockerignore
 .env
 Dockerfile
@@ -8,3 +9,4 @@ fly.toml
 /.cache
 /build
 /public/build
+/coverage
