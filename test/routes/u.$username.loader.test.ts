@@ -14,8 +14,8 @@ vi.mock("~/models/user.server");
 vi.mock("~/models/score.server");
 vi.mock("~/utils/auth.server");
 
-const mockedUserModel = vi.mocked(userModel, { partial: true });
-const mockedScoreModel = vi.mocked(scoreModel, { partial: true });
+const mockedUser = vi.mocked(userModel, { partial: true });
+const mockedScore = vi.mocked(scoreModel, { partial: true });
 const mockedAuth = vi.mocked(auth, { partial: true });
 
 const mkArgs = (
@@ -39,14 +39,14 @@ describe("u.$username loader", () => {
   });
 
   it("404s when user not found", async () => {
-    mockedUserModel.getUser.mockResolvedValue(null);
+    mockedUser.getUser.mockResolvedValue(null);
     await expect(loader(mkArgs())).rejects.toMatchObject({
       status: 404,
     });
   });
 
   it("computes privacy flags for public profile: other user, not private", async () => {
-    mockedUserModel.getUser.mockResolvedValue({
+    mockedUser.getUser.mockResolvedValue({
       id: 1,
       username: "alice",
     } as User);
@@ -54,9 +54,9 @@ describe("u.$username loader", () => {
       id: 2,
       username: "bob",
     } as User);
-    mockedUserModel.getUserPrivacy.mockResolvedValue(false);
-    mockedScoreModel.getScores.mockResolvedValue([] as Score[]);
-    mockedUserModel.getUserAchievements.mockResolvedValue({
+    mockedUser.getUserPrivacy.mockResolvedValue(false);
+    mockedScore.getScores.mockResolvedValue([] as Score[]);
+    mockedUser.getUserAchievements.mockResolvedValue({
       bigRun: "no-display",
       grizzBadge: "no-display",
       eggstraWork: "no-display",
@@ -71,7 +71,7 @@ describe("u.$username loader", () => {
   });
 
   it("computes privacy flags for public profile: other user, private", async () => {
-    mockedUserModel.getUser.mockResolvedValue({
+    mockedUser.getUser.mockResolvedValue({
       id: 1,
       username: "alice",
     } as User);
@@ -79,9 +79,9 @@ describe("u.$username loader", () => {
       id: 2,
       username: "bob",
     } as User);
-    mockedUserModel.getUserPrivacy.mockResolvedValue(true);
-    mockedScoreModel.getScores.mockResolvedValue([] as Score[]);
-    mockedUserModel.getUserAchievements.mockResolvedValue({
+    mockedUser.getUserPrivacy.mockResolvedValue(true);
+    mockedScore.getScores.mockResolvedValue([] as Score[]);
+    mockedUser.getUserAchievements.mockResolvedValue({
       bigRun: "no-display",
       grizzBadge: "no-display",
       eggstraWork: "no-display",
@@ -96,7 +96,7 @@ describe("u.$username loader", () => {
   });
 
   it("computes privacy flags for public profile: same user, private", async () => {
-    mockedUserModel.getUser.mockResolvedValue({
+    mockedUser.getUser.mockResolvedValue({
       id: 1,
       username: "alice",
     } as User);
@@ -104,9 +104,9 @@ describe("u.$username loader", () => {
       id: 1,
       username: "alice",
     } as User);
-    mockedUserModel.getUserPrivacy.mockResolvedValue(true);
-    mockedScoreModel.getScores.mockResolvedValue([] as Score[]);
-    mockedUserModel.getUserAchievements.mockResolvedValue({
+    mockedUser.getUserPrivacy.mockResolvedValue(true);
+    mockedScore.getScores.mockResolvedValue([] as Score[]);
+    mockedUser.getUserAchievements.mockResolvedValue({
       bigRun: "no-display",
       grizzBadge: "no-display",
       eggstraWork: "no-display",
@@ -121,7 +121,7 @@ describe("u.$username loader", () => {
   });
 
   it("computes privacy flags for public profile: same user, private", async () => {
-    mockedUserModel.getUser.mockResolvedValue({
+    mockedUser.getUser.mockResolvedValue({
       id: 1,
       username: "alice",
     } as User);
@@ -129,9 +129,9 @@ describe("u.$username loader", () => {
       id: 1,
       username: "alice",
     } as User);
-    mockedUserModel.getUserPrivacy.mockResolvedValue(false);
-    mockedScoreModel.getScores.mockResolvedValue([] as Score[]);
-    mockedUserModel.getUserAchievements.mockResolvedValue({
+    mockedUser.getUserPrivacy.mockResolvedValue(false);
+    mockedScore.getScores.mockResolvedValue([] as Score[]);
+    mockedUser.getUserAchievements.mockResolvedValue({
       bigRun: "no-display",
       grizzBadge: "no-display",
       eggstraWork: "no-display",
@@ -146,7 +146,7 @@ describe("u.$username loader", () => {
   });
 
   it("computes best regular/nightless/overall scores per map", async () => {
-    mockedUserModel.getUser.mockResolvedValue({
+    mockedUser.getUser.mockResolvedValue({
       id: 1,
       username: "alice",
     } as User);
@@ -154,14 +154,14 @@ describe("u.$username loader", () => {
       id: 1,
       username: "alice",
     } as User);
-    mockedUserModel.getUserPrivacy.mockResolvedValue(false);
-    mockedUserModel.getUserAchievements.mockResolvedValue({
+    mockedUser.getUserPrivacy.mockResolvedValue(false);
+    mockedUser.getUserAchievements.mockResolvedValue({
       bigRun: "no-display",
       grizzBadge: "no-display",
       eggstraWork: "no-display",
     } as UserAchievements);
 
-    mockedScoreModel.getScores.mockResolvedValue([
+    mockedScore.getScores.mockResolvedValue([
       { map: "Sockeye Station", score: 100, nightless: false } as Score,
       { map: "Sockeye Station", score: 120, nightless: true } as Score,
       { map: "Jammin' Salmon Junction", score: 100, nightless: false } as Score,
