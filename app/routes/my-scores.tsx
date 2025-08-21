@@ -3,8 +3,7 @@ import { json, redirect } from "@remix-run/node";
 import { useActionData, useLoaderData, useNavigation } from "@remix-run/react";
 import { useState, useEffect } from "react";
 import { getUserAuth } from "~/utils/auth.server";
-import { db } from "~/utils/db.server";
-import { getScores } from "~/models/score.server";
+import { deleteScore, getScores, updateScore } from "~/models/score.server";
 import { ScoresPage } from "~/components/scores/ScoresPage";
 import type { Score } from "~/types/score";
 import { User } from "~/types/user";
@@ -36,7 +35,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const action = form.get("action");
 
   if (action === "deleteScore") {
-    const scoreId = form.get("scoreId");
+    const scoreId = Number(form.get("scoreId"));
 
     if (!scoreId) {
       return json(
@@ -45,16 +44,8 @@ export async function action({ request }: ActionFunctionArgs) {
       );
     }
 
-    // Verify the score belongs to the user before deleting
-    const score = db
-      .prepare(
-        `
-      SELECT * FROM scores WHERE id = ? AND userId = ?
-    `
-      )
-      .get(scoreId, user.id);
-
-    if (!score) {
+    const result = await deleteScore(user.id, scoreId);
+    if (!result) {
       return json(
         {
           success: false,
@@ -64,24 +55,17 @@ export async function action({ request }: ActionFunctionArgs) {
       );
     }
 
-    // Delete the score
-    db.prepare(
-      `
-      DELETE FROM scores WHERE id = ?
-    `
-    ).run(scoreId);
-
     return json({ success: true, message: "Score deleted successfully" });
   }
 
   if (action === "updateScore") {
-    const scoreId = form.get("scoreId");
+    const scoreId = Number(form.get("scoreId"));
     const map = form.get("map") as string;
     const score = Number(form.get("score"));
     const date = form.get("date") as string;
     const note = (form.get("note") as string) || "";
     // Check if the nightless checkbox was checked
-    const nightless = form.has("nightless") ? 1 : 0;
+    const nightless = form.has("nightless") ? true : false;
     const hazard = Number(form.get("hazard"));
     const rankTitle = form.get("rankTitle") as string;
     const rankNum = Number(form.get("rankNum"));
@@ -93,33 +77,8 @@ export async function action({ request }: ActionFunctionArgs) {
       );
     }
 
-    // Verify the score belongs to the user before updating
-    const existingScore = db
-      .prepare(
-        `
-      SELECT * FROM scores WHERE id = ? AND userId = ?
-    `
-      )
-      .get(scoreId, user.id);
-
-    if (!existingScore) {
-      return json(
-        {
-          success: false,
-          message: "Score not found or you don't have permission to update it",
-        },
-        { status: 404 }
-      );
-    }
-
     // Update the score
-    db.prepare(
-      `
-      UPDATE scores
-      SET map = ?, score = ?, nightless = ?, hazard = ?, rankTitle = ?, rankNum = ?, date = ?, note = ?
-      WHERE id = ?
-    `
-    ).run(
+    const result = await updateScore({
       map,
       score,
       nightless,
@@ -128,10 +87,15 @@ export async function action({ request }: ActionFunctionArgs) {
       rankNum,
       date,
       note,
-      scoreId
-    );
+      userId: user.id,
+      id: scoreId,
+    });
 
-    return json({ success: true, message: "Score updated successfully" });
+    if (result) {
+      return json({ success: true, message: "Score updated successfully" });
+    } else {
+      return json({ success: false, message: "Score failed to update" });
+    }
   }
 
   return json({ success: false, message: "Invalid action" }, { status: 400 });

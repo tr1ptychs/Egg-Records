@@ -23,6 +23,11 @@ export function ScoreDisplay({ score, nightless }: ScoreDisplayProps) {
 }
 
 export function MapItem({ map, mapScore }: MapItemProps) {
+  // case where user has no entries for particular map
+  if (!mapScore) {
+    mapScore = { regular: null, nightless: null };
+  }
+
   const formatScore = (score: number | null) => {
     return score ? score.toLocaleString() : "---";
   };
@@ -42,11 +47,11 @@ export function MapItem({ map, mapScore }: MapItemProps) {
         <div className={styles.name}>{map}</div>
         <div className={styles.scores}>
           <ScoreDisplay
-            score={formatScore(mapScore.regular.score)}
+            score={formatScore(mapScore.regular)}
             nightless={false}
           />
           <ScoreDisplay
-            score={formatScore(mapScore.nightless.score)}
+            score={formatScore(mapScore.nightless)}
             nightless={true}
           />
         </div>

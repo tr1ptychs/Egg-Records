@@ -1,10 +1,10 @@
 import { useLoaderData, useOutletContext } from "@remix-run/react";
 import { json } from "@remix-run/node";
-import { db } from "~/utils/db.server";
 import { MainLayout } from "~/components/layout/MainLayout";
 import { ScoreCard } from "~/components/scores/ScoreCard";
 import { User } from "~/types/user";
 import { Score } from "~/types/score";
+import { getRecentScores } from "~/models/score.server";
 
 export const meta = () => {
   return [
@@ -23,24 +23,7 @@ interface LoaderData {
 
 export async function loader() {
   // Get recent global scores with user info
-  const recentScoresResults = db
-    .prepare(
-      `
-    SELECT
-      scores.*,
-      users.username,
-      users.avatar,
-      users.discordId
-    FROM scores
-    JOIN users ON scores.userId = users.id
-    WHERE scores.userId NOT IN (
-      SELECT userId FROM user_settings WHERE private = 1
-    )
-    ORDER BY scores.date DESC
-    LIMIT 20
-  `
-    )
-    .all() as Score[];
+  const recentScoresResults = (await getRecentScores()) as Score[];
 
   const recentScores = recentScoresResults.map((score) => ({
     ...score,
