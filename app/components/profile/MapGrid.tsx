@@ -17,7 +17,7 @@ export function MapGrid({ mapScores, achievements, maps }: MapGridProps) {
           <MapItem key={map} map={map} mapScore={mapScores[map]} />
         ))}
 
-        <AchievementBadges scores={mapScores} achievements={achievements} />
+        <AchievementBadges achievements={achievements} />
       </div>
     </div>
   );
