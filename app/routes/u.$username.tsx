@@ -6,11 +6,10 @@ import {
   getUserPrivacy,
   getUserAchievements,
 } from "~/models/user.server";
-import { getScores } from "~/models/score.server";
+import { getHighScores } from "~/models/score.server";
 import { getUserAuth } from "~/utils/auth.server";
 import { ProfilePage } from "~/components/profile/Profile";
-import { MapScore, User, UserAchievements } from "~/types/user";
-import { Score } from "~/types/score";
+import { User, UserAchievements } from "~/types/user";
 
 const ALL_MAPS = [
   "Spawning Grounds",
@@ -53,35 +52,11 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   const isOwnProfile = (currentUser && currentUser.id === user.id) as boolean;
   const canViewProfile = (!isPrivate || isOwnProfile) as boolean;
 
-  let mapScores: Record<string, MapScore> = {};
   let achievements: UserAchievements | null = null;
 
-  const scores = (await getScores(user.id)) as Score[];
-
-  mapScores = ALL_MAPS.reduce((acc, map) => {
-    acc[map] = {
-      regular: { score: null },
-      nightless: { score: null },
-    };
-    return acc;
-  }, {} as Record<string, MapScore>);
+  const mapScores = await getHighScores(user.id);
 
   achievements = (await getUserAchievements(user.id)) as UserAchievements;
-
-  // Find best scores for each category
-  scores.forEach((score) => {
-    const mapScore = mapScores[score.map];
-
-    if (score.nightless) {
-      if (!mapScore.nightless.score || score.score > mapScore.nightless.score) {
-        mapScore.nightless.score = score.score;
-      }
-    } else {
-      if (!mapScore.regular.score || score.score > mapScore.regular.score) {
-        mapScore.regular.score = score.score;
-      }
-    }
-  });
 
   return json({
     user,

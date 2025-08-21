@@ -24,11 +24,7 @@ export interface UserStats {
   highestScore: number;
 }
 
-export interface ScoreRecord {
-  score: number | null;
-}
-
 export interface MapScore {
-  regular: ScoreRecord;
-  nightless: ScoreRecord;
+  regular: number | null;
+  nightless: number | null;
 }

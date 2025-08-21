@@ -1,8 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { LoaderFunctionArgs } from "@remix-run/node";
 
-import type { User, UserAchievements } from "~/types/user";
-import type { Score } from "~/types/score";
+import type { MapScore, User, UserAchievements } from "~/types/user";
 
 import { loader } from "~/routes/u.$username";
 
@@ -55,7 +54,6 @@ describe("u.$username loader", () => {
       username: "bob",
     } as User);
     mockedUser.getUserPrivacy.mockResolvedValue(false);
-    mockedScore.getScores.mockResolvedValue([] as Score[]);
     mockedUser.getUserAchievements.mockResolvedValue({
       bigRun: "no-display",
       grizzBadge: "no-display",
@@ -80,7 +78,6 @@ describe("u.$username loader", () => {
       username: "bob",
     } as User);
     mockedUser.getUserPrivacy.mockResolvedValue(true);
-    mockedScore.getScores.mockResolvedValue([] as Score[]);
     mockedUser.getUserAchievements.mockResolvedValue({
       bigRun: "no-display",
       grizzBadge: "no-display",
@@ -105,7 +102,6 @@ describe("u.$username loader", () => {
       username: "alice",
     } as User);
     mockedUser.getUserPrivacy.mockResolvedValue(true);
-    mockedScore.getScores.mockResolvedValue([] as Score[]);
     mockedUser.getUserAchievements.mockResolvedValue({
       bigRun: "no-display",
       grizzBadge: "no-display",
@@ -130,7 +126,6 @@ describe("u.$username loader", () => {
       username: "alice",
     } as User);
     mockedUser.getUserPrivacy.mockResolvedValue(false);
-    mockedScore.getScores.mockResolvedValue([] as Score[]);
     mockedUser.getUserAchievements.mockResolvedValue({
       bigRun: "no-display",
       grizzBadge: "no-display",
@@ -161,23 +156,20 @@ describe("u.$username loader", () => {
       eggstraWork: "no-display",
     } as UserAchievements);
 
-    mockedScore.getScores.mockResolvedValue([
-      { map: "Sockeye Station", score: 100, nightless: false } as Score,
-      { map: "Sockeye Station", score: 120, nightless: true } as Score,
-      { map: "Jammin' Salmon Junction", score: 100, nightless: false } as Score,
-      { map: "Jammin' Salmon Junction", score: 200, nightless: false } as Score,
-      { map: "Jammin' Salmon Junction", score: 120, nightless: false } as Score,
-    ]);
+    mockedScore.getHighScores.mockResolvedValue({
+      "Sockeye Station": { nightless: 100, regular: 150 },
+      "Jammin' Salmon Junction": { regular: 250, nightless: null },
+    } as Record<string, MapScore>);
 
     const res = await loader(mkArgs());
     const data = await res.json();
 
     const sockeye = data.mapScores["Sockeye Station"];
-    expect(sockeye.regular.score).toBe(100);
-    expect(sockeye.nightless.score).toBe(120);
+    expect(sockeye.regular).toBe(150);
+    expect(sockeye.nightless).toBe(100);
 
     const jammin = data.mapScores["Jammin' Salmon Junction"];
-    expect(jammin.regular.score).toBe(200);
-    expect(jammin.nightless.score).toBe(null);
+    expect(jammin.regular).toBe(250);
+    expect(jammin.nightless).toBe(null);
   });
 });
