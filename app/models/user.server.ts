@@ -33,24 +33,20 @@ export async function getUserPrivacy(userId: number): Promise<boolean> {
 export async function setUserPrivacy(userId: number, isPrivate: boolean) {
   const newPrivacy = isPrivate ? 1 : 0;
 
-  console.log(
-    db
-      .prepare(
-        `
+  db.prepare(
+    `
     UPDATE user_settings
     SET private = ?
     WHERE userId = ?
   `
-      )
-      .run(newPrivacy, userId)
-  );
+  ).run(newPrivacy, userId);
 }
 
 export async function getUserAchievements(
   userId: number
 ): Promise<UserAchievements> {
   const row = db
-    .prepare<unknown[], UserAchievements | undefined>(
+    .prepare(
       `
     SELECT *
     FROM user_achievements
@@ -58,13 +54,7 @@ export async function getUserAchievements(
   `
     )
     .get(userId);
-  if (!row)
-    return {
-      grizzBadge: "no-display",
-      bigRun: "no-display",
-      eggstraWork: "no-display",
-    } as UserAchievements;
-  return row;
+  return row as UserAchievements;
 }
 
 export async function updateUserAchievements(

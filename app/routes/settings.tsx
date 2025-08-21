@@ -116,7 +116,7 @@ export async function action({ request }: ActionFunctionArgs) {
     }
 
     try {
-      await updateUserAchievements(user.id, grizzBadge, bigRun, eggstraWork);
+      await updateUserAchievements(user.id, bigRun, eggstraWork, grizzBadge);
     } catch (error) {
       return json<ActionData>({
         action: "updateAchievements",

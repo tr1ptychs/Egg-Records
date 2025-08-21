@@ -28,6 +28,7 @@ export function ProfilePage({
       <div className={styles.card}>
         <ProfileHeader
           profile={user}
+          scores={mapScores}
           isPrivate={isPrivate}
           isOwnProfile={isOwnProfile}
         />

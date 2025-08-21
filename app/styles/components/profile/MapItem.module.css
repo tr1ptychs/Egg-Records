@@ -48,6 +48,11 @@
   font-size: 0.9rem;
 }
 
+.epsilon {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
 .score-value {
   font-size: 1rem;
   font-weight: 600;
