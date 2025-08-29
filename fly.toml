@@ -10,9 +10,6 @@ primary_region = 'ord'
 
 [build]
 
-[deploy]
-  regions = ["ams"]
-
 [[mounts]]
   source = 'data'
   destination = '/data'
@@ -25,7 +22,7 @@ primary_region = 'ord'
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
-  min_machines_running = 0
+  min_machines_running = 1
   processes = ['app']
 
 [[vm]]
